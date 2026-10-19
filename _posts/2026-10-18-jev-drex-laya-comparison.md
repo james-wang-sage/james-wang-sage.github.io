@@ -38,7 +38,8 @@ the judgment.
 
 | | **Jev 1.13** (TypeSafe) | **Drex 2.0** (Nace) | **Laya** (ConvAI) |
 |---|---|---|---|
-| Weights | Closed, hosted API only | Open | Open, Apache 2.0 |
+| Weights | Closed | Open | Open, Apache 2.0 |
+| Hosted API | Yes (TypeSafe; also resellers) | Yes (`console.nace.ai`) | No; self-host only (`laya-serve`) |
 | Model | Not disclosed | Qwen3.6-35B-A3B MoE (35B total, ~3B active) | Encoders: ModernBERT-large 421M, mmBERT-base 322M |
 | Hardware to self-host | n/a | Large GPU: ~70 GB bf16, ~37 GB Q8 GGUF | Small: a T4, or CPU (193–464 ms) |
 | Context | Not published | 128K tokens | 512 (English) / 1,024; up to 8K multilingual |
@@ -48,20 +49,21 @@ the judgment.
 | Many options | Up to 255; 0.870 on Banking77 | Not published | Drops past ~20 options: 0.425 on Banking77 |
 | Calibration | Raw ECE 0.144 | Not published | Over-confident until temperature-fitted (0.466 → 0.081) |
 | Languages | Not published | Not published | 100+, with a built-in language router |
-| Price | ~$0.04–0.06 per 1M input tokens, output free | Hosted pricing not public; self-host free | Free (self-host) |
+| Price | ~$0.04–0.06 per 1M input tokens, output free | Hosted: $0.06 per 1M input tokens (v2.0), output free, $25 signup credit; self-host free | Free (self-host) |
 
 ## Which one when
 
-- **Jev** if you want it to work zero-shot today, hosted, with the most mature SDKs and support for
-  large option sets.
-- **Drex** if data has to stay in your own environment, you need long documents (128K), and you
-  still want good zero-shot answers. Budget for a large GPU.
+- **Jev** if you want it to work zero-shot today with the most mature SDKs and support for large
+  option sets, and a hosted-only service is fine.
+- **Drex** if you want both doors open: a hosted API priced like Jev today, and open weights you can
+  move in-house later if data has to stay in your own environment. It also reads the longest
+  documents (128K). Self-hosting it takes a large GPU.
 - **Laya** if the task is narrow and high-volume, latency matters, and you have labeled examples to
   fine-tune on. It is the only one that runs comfortably on CPU or at the edge, and the only one
   with strong multilingual numbers.
 
-In one line: Jev is the hosted default, Drex is a self-hostable large-model take on the same idea,
-and Laya is a very small model you train for your own task.
+In one line: Jev is the hosted default, Drex offers the same idea both hosted and as open weights,
+and Laya is a very small model you train and run yourself.
 
 ## Read the benchmarks carefully
 
@@ -81,7 +83,7 @@ following option labels instead of the state.
 
 ## Sources
 
-- [Drex](https://www.nace.ai/drex)
+- [Drex](https://www.nace.ai/drex) and its [pricing](https://console.nace.ai/docs/drex/reference/pricing)
 - [Laya model card](https://huggingface.co/convaiinnovations/laya) and
   [laya-typed-decisions](https://huggingface.co/convaiinnovations/laya-typed-decisions)
 - [TypeSafe Jev explained (Requesty)](https://www.requesty.ai/blog/typesafe-jev-explained)
