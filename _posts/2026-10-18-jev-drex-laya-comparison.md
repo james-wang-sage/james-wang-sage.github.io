@@ -39,7 +39,7 @@ the judgment.
 | | **Jev 1.13** (TypeSafe) | **Drex 2.0** (Nace) | **Laya** (ConvAI) |
 |---|---|---|---|
 | Weights | Closed | Open, under Open RAIL-M (use restrictions; not OSI open source) | Open, Apache 2.0 |
-| Hosted API | Yes (`api.typesafe.ai`; also via OpenRouter) | Yes (`console.nace.ai`) | No; self-host only (`laya-serve`), plus a free demo Space |
+| Hosted API | Yes (`api.typesafe.ai`; also via OpenRouter) | Yes (`console.nace.ai`) | No first-party API; self-host (`laya-serve`). Third-party: Vercel AI Gateway (free through October 31, 2026, billed after). Plus a demo Space |
 | Model | Not disclosed | Qwen3.6-35B-A3B MoE (35B total, ~3B active) | Encoders: ModernBERT-large 421M, mmBERT-base 322M |
 | Hardware to self-host | n/a | Large GPU: ~70 GB bf16, ~37 GB Q8 GGUF | Small: a T4, or CPU (193–464 ms) |
 | Context | 64K per request / 32K per question; 262K with the long-context header | 128K state (hosted); self-host defaults to 16K, up to 128K | 512 (English) / 1,024; up to 8K multilingual |
@@ -50,6 +50,7 @@ the judgment.
 | Calibration | No vendor figure; independent ECE 0.02–0.35 depending on the task | No figures published | Over-confident until temperature-fitted (0.466 → 0.081) |
 | Languages | English primary; others, including CJK, handled less accurately | No list published | 100+ (45 of 51 measured languages usable), with a built-in language router |
 | Price | $0.042 per 1M input tokens, output free | Hosted: $0.06 per 1M input tokens (v2.0), output free, $25 signup credit. Self-host: royalty-free for personal or research use, or organizations under $1M revenue and funding; others need a commercial license | Free (self-host) |
+| Rate limits | Set per organization in requests/s and tokens/s; the numbers are in your console, not the public docs. My test: ~850 requests/min sustained (806 calls in 57 s, 4 in flight), no 429s | Free tier: 120 requests/min, 8 in flight. Paid: 600 requests/min, 16 in flight. My test: 429s on the free tier even when paced below 110 requests/min; none after adding credit (~800 calls in about 2 minutes) | None when self-hosted; your own hardware is the limit. AI Gateway limits not published |
 
 Jev 1.14 shipped as a preview (`jev-preview`) on October 14; `jev-latest` still points to 1.13.
 
@@ -90,9 +91,10 @@ following option labels instead of the state.
 - [Jev models, context and pricing](https://docs.typesafe.ai/models) and
   [API reference](https://docs.typesafe.ai/api)
 - [Drex](https://www.nace.ai/drex), its [pricing](https://console.nace.ai/docs/drex/reference/pricing),
-  [limits](https://console.nace.ai/docs/drex/reference/limits) and
+  [limits and rate limits](https://console.nace.ai/docs/drex/reference/limits) and
   [repo](https://github.com/nace-ai/drex-decision-models)
 - [Laya model card](https://huggingface.co/convaiinnovations/laya) and
-  [laya-typed-decisions](https://huggingface.co/convaiinnovations/laya-typed-decisions)
+  [laya-typed-decisions](https://huggingface.co/convaiinnovations/laya-typed-decisions), and
+  [Laya on Vercel AI Gateway](https://vercel.com/changelog/laya-decision-model-now-available-on-ai-gateway-free-through-october-31)
 - [jev-benchmarks](https://github.com/AbdelStark/jev-benchmarks) and
   [decision-model-benchmark](https://github.com/nibzard/decision-model-benchmark)
