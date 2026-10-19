@@ -3,7 +3,10 @@ layout: post
 title: "Jev, Drex, and Laya: Three System One Decision Models Compared"
 date: 2026-10-18
 tags: [ai, llm, decision-models]
+image: /assets/images/2026-10-18-jev-drex-laya-cover.jpg
 ---
+
+![One input split across three decision engines, converging on typed answers](/assets/images/2026-10-18-jev-drex-laya-cover.jpg)
 
 A new kind of model showed up in 2026: the **System One decision model**. Instead of writing an
 answer token by token, it reads a piece of text (the *state*) plus a set of typed questions, and
