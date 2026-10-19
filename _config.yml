@@ -1,0 +1,7 @@
+title: James Wang
+description: Notes on Java, Spring, reactive systems, and AI tooling.
+url: https://james-wang-sage.github.io
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
