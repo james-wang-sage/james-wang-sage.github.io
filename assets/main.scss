@@ -1,0 +1,112 @@
+---
+---
+
+// Override Minima's palette before importing its layouts and base styles.
+$text-color: #d5dde7;
+$background-color: #0f141b;
+$brand-color: #8cc8ff;
+$grey-color: #a0adbe;
+$grey-color-light: #344256;
+$grey-color-dark: #b8c4d4;
+
+@import "minima";
+
+:root {
+  color-scheme: dark;
+  --page: #0f141b;
+  --surface: #171f2b;
+  --text: #d5dde7;
+  --heading: #f0f4f8;
+  --muted: #a0adbe;
+  --border: #344256;
+  --link: #8cc8ff;
+}
+
+body {
+  color: var(--text);
+  background: var(--page);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading);
+}
+
+a { color: var(--link); }
+a:visited { color: #b8b6ff; }
+a:hover { color: var(--heading); }
+a:focus-visible, input:focus-visible, button:focus-visible {
+  outline: 2px solid #f1c98a;
+  outline-offset: 4px;
+}
+
+::selection { background: #335778; color: #ffffff; }
+
+.site-header {
+  border-top-color: #647a94;
+  border-bottom-color: var(--border);
+}
+
+.site-title, .site-title:visited { color: var(--heading); }
+.site-nav .page-link { color: var(--text); }
+.site-nav .menu-icon > svg { fill: var(--text); }
+.site-footer { border-top-color: var(--border); }
+.footer-col-wrapper, .post-meta { color: var(--muted); }
+.svg-icon { fill: var(--muted); }
+
+blockquote {
+  color: var(--muted);
+  background: var(--surface);
+  border-left: 3px solid var(--link);
+  padding: 12px 16px;
+  letter-spacing: normal;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--border);
+}
+
+pre, code {
+  color: var(--text);
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+pre > code { background: transparent; }
+.highlight, .highlighter-rouge .highlight { background: var(--surface); }
+
+// Rouge syntax colors chosen for the dark code surface.
+.highlight .c, .highlight .ch, .highlight .cm, .highlight .cp,
+.highlight .cpf, .highlight .c1, .highlight .cs, .highlight .go,
+.highlight .gp, .highlight .gh, .highlight .gu { color: var(--muted); }
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kn,
+.highlight .kp, .highlight .kr, .highlight .kt, .highlight .o,
+.highlight .ow, .highlight .nt { color: #b5bdff; }
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .sc,
+.highlight .dl, .highlight .sd, .highlight .s2, .highlight .se,
+.highlight .sh, .highlight .si, .highlight .sx, .highlight .sr,
+.highlight .s1, .highlight .ss { color: #9ad7b0; }
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh,
+.highlight .mi, .highlight .il, .highlight .mo, .highlight .na,
+.highlight .nl { color: #f1c98a; }
+.highlight .nf, .highlight .fm, .highlight .nc, .highlight .nd,
+.highlight .ne, .highlight .nn, .highlight .no { color: var(--link); }
+.highlight .nb, .highlight .bp, .highlight .nv, .highlight .vc,
+.highlight .vg, .highlight .vi, .highlight .vm,
+.highlight .ni { color: #d7bcff; }
+.highlight .err, .highlight .gr, .highlight .gt { color: #ffb4b4; }
+.highlight .err, .highlight .gd { background: #3a252d; }
+.highlight .gd { color: #ffb4b4; }
+.highlight .gi { color: #b4e4bc; background: #20362c; }
+.highlight .w { color: var(--text); }
+
+table { color: var(--text); border-color: var(--border); }
+table tr { background: var(--page); }
+table tr:nth-child(even) { background: var(--surface); }
+table th { color: var(--heading); background: #202b3a; }
+table th, table td { border-color: var(--border); }
+
+@media screen and (max-width: 600px) {
+  .site-nav { background: var(--surface); border-color: var(--border); }
+}
