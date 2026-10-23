@@ -1,0 +1,21 @@
+---
+layout: default
+---
+<article class="post h-entry reader-shell" itemscope itemtype="https://schema.org/BlogPosting">
+  <header class="reader-header">
+    <a class="back-link" href="{{ '/' | relative_url }}#writing"><span aria-hidden="true">←</span> All writing</a>
+    <div class="reader-meta">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: '%b %d, %Y' }}</time>
+      <span class="meta-dot" aria-hidden="true">·</span>
+      <span>{{ page.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+      <span class="reader-author">{{ page.author | default: site.title | escape }}</span>
+    </div>
+    <h1 class="reader-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    {%- if page.description -%}<p class="reader-description">{{ page.description | escape }}</p>{%- endif -%}
+    <div class="reader-tags">{%- for tag in page.tags -%}<span class="topic-tag">{{ tag | replace: '-', ' ' | escape }}</span>{%- endfor -%}</div>
+  </header>
+  <div class="post-content e-content" itemprop="articleBody">{{ content }}</div>
+  <div class="reader-end"><span>Thanks for reading.</span><a href="{{ '/' | relative_url }}#writing">More from the notebook <span aria-hidden="true">→</span></a></div>
+  {%- if site.disqus.shortname -%}{%- include disqus_comments.html -%}{%- endif -%}
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>

@@ -1,0 +1,51 @@
+---
+layout: default
+---
+<div class="magazine-home">
+  <section class="magazine-intro" aria-labelledby="notebook-title">
+    <div class="intro-copy">
+      <p class="eyebrow"><span class="status-mark" aria-hidden="true"></span> The engineering notebook</p>
+      <h1 id="notebook-title">On systems,<br><span>software &amp; AI.</span></h1>
+      <p class="intro-description">{{ site.description | escape }}</p>
+      <a class="intro-link" href="#writing">Explore the writing <span aria-hidden="true">↘</span></a>
+    </div>
+    <div class="notebook-index">
+      <span class="index-label">In the notebook</span>
+      <span class="index-count">{% if site.posts.size < 10 %}0{% endif %}{{ site.posts.size }}</span>
+      <span class="index-label">Published notes</span>
+      <p>Java &amp; Spring<br>Reactive systems<br>Applied AI</p>
+    </div>
+  </section>
+
+  {{ content }}
+
+  {%- if site.posts.size > 0 -%}
+    <section class="featured-section" id="writing" aria-labelledby="featured-heading">
+      <div class="section-bar">
+        <h2 class="section-label" id="featured-heading">Latest entry</h2>
+        <span class="section-rule" aria-hidden="true"></span>
+        <span class="section-number">01</span>
+      </div>
+      {%- assign featured_post = site.posts.first -%}
+      {%- include post-card.html post=featured_post featured=true -%}
+    </section>
+    {%- if site.posts.size > 1 -%}
+      <section class="archive-section" aria-labelledby="archive-heading">
+        <div class="archive-heading">
+          <div><p class="eyebrow">Ideas, tools &amp; observations</p><h2 id="archive-heading">From the notebook</h2></div>
+          <span class="archive-count">{{ site.posts.size | minus: 1 }} more {% if site.posts.size == 2 %}entry{% else %}entries{% endif %}</span>
+        </div>
+        <div class="story-grid">
+          {%- for post in site.posts offset: 1 -%}{%- include post-card.html post=post -%}{%- endfor -%}
+        </div>
+      </section>
+    {%- endif -%}
+  {%- else -%}
+    <p class="empty-notebook" id="writing">The first note is on its way.</p>
+  {%- endif -%}
+
+  <aside class="rss-panel" aria-label="Follow the notebook">
+    <div><p class="eyebrow">Keep in the loop</p><h2>Good notes are worth keeping.</h2><p>Follow new entries in your favorite feed reader.</p></div>
+    <a class="feed-button" href="{{ '/feed.xml' | relative_url }}">Subscribe via RSS <span aria-hidden="true">↗</span></a>
+  </aside>
+</div>

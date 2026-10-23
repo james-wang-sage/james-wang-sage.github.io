@@ -1,0 +1,13 @@
+<footer class="site-footer magazine-footer">
+  <div class="wrapper footer-inner">
+    <div>
+      <a class="footer-name" href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
+      <p>A personal engineering notebook.</p>
+    </div>
+    <div class="footer-links">
+      <a href="{{ '/about/' | relative_url }}">About</a>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS feed</a>
+      <span>© {{ site.time | date: '%Y' }}</span>
+    </div>
+  </div>
+</footer>

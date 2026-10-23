@@ -1,0 +1,35 @@
+{%- assign entry = include.post -%}
+{%- assign entry_id = entry.id | slugify -%}
+{%- assign read_minutes = entry.content | number_of_words | divided_by: 200 | plus: 1 -%}
+{%- assign summary = entry.description | default: entry.excerpt | strip_html | strip -%}
+{%- if summary == '' -%}
+  {%- assign summary = entry.content | markdownify | strip_html | strip | truncate: 155 -%}
+{%- endif -%}
+<article class="story-card{% if include.featured %} story-card--featured{% endif %}">
+  <a class="story-link" href="{{ entry.url | relative_url }}" aria-labelledby="{{ entry_id }}-title">
+    <div class="story-media{% unless entry.image %} story-media--empty{% endunless %}">
+      {%- if entry.image -%}
+        <img src="{{ entry.image | relative_url }}" alt="" decoding="async"{% if include.featured %} fetchpriority="high"{% else %} loading="lazy"{% endif %}>
+      {%- else -%}
+        <span class="image-placeholder" aria-hidden="true">Field notes.</span>
+      {%- endif -%}
+      <span class="media-corner media-corner--top" aria-hidden="true"></span>
+      <span class="media-corner media-corner--bottom" aria-hidden="true"></span>
+    </div>
+    <div class="story-body">
+      <div class="story-meta">
+        <time datetime="{{ entry.date | date_to_xmlschema }}">{{ entry.date | date: '%b %d, %Y' }}</time>
+        <span class="meta-dot" aria-hidden="true">·</span>
+        <span>{{ read_minutes }} min read</span>
+      </div>
+      <h3 class="story-title" id="{{ entry_id }}-title">{{ entry.title | escape }}</h3>
+      {%- if summary != '' -%}<p class="story-summary">{{ summary | escape }}</p>{%- endif -%}
+      <div class="story-bottom">
+        <div class="story-tags">
+          {%- for tag in entry.tags limit: 2 -%}<span class="topic-tag">{{ tag | replace: '-', ' ' | escape }}</span>{%- endfor -%}
+        </div>
+        <span class="story-arrow" aria-hidden="true">→</span>
+      </div>
+    </div>
+  </a>
+</article>

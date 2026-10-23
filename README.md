@@ -16,3 +16,10 @@ https://james-wang-sage.github.io/.
 
 This repository is public: nothing internal to an employer (hostnames, internal URLs, ticket
 or customer data) goes in any commit — git history is public too.
+
+## Appearance
+
+The dark editorial layout lives in `_layouts/`, with navigation, footer, and reusable article
+cards in `_includes/`. Palette, typography, responsive layout, and reduced-motion styles are
+in `assets/main.scss`. The design adapts MotionSites' Blog Showcase composition to this site's
+own article data and cover images; it remains a static Jekyll site.
