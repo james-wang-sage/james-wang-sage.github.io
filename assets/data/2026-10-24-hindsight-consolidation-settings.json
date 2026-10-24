@@ -1,0 +1,65 @@
+{
+  "measured_date": "2026-10-24",
+  "hindsight_api_version": "1.1.0",
+  "coding_agents_integration_version": "0.8.2",
+  "configuration": {
+    "llm_provider": "chatgpt",
+    "llm_model": "gpt-6-luna",
+    "consolidation_reasoning": "low",
+    "batch_size": 8,
+    "group_parallelism": 4,
+    "max_memories_per_round": 100,
+    "decision_provider": "typesafe",
+    "decision_model_alias": "jev-latest",
+    "smoke_test_resolved_version": "jev-1.14.0",
+    "scope": "one opted-in bank"
+  },
+  "batch_size_comparison": {
+    "timing_definition": "Sum of logged recall, LLM, embedding and database-write phase times; excludes orchestration overhead.",
+    "batch_8": {
+      "facts": 100,
+      "llm_calls": 30,
+      "input_tokens": 355223,
+      "phase_seconds": 583.894
+    },
+    "batch_4": {
+      "facts": 100,
+      "llm_calls": 45,
+      "input_tokens": 421962,
+      "phase_seconds": 578.473
+    }
+  },
+  "decision_model_comparison": {
+    "timing_definition": "Whole-round wall time, including triage.",
+    "without_jev": {
+      "memories": 100,
+      "llm_calls": 30,
+      "llm_input_tokens": 355223,
+      "llm_output_tokens": 25014,
+      "round_wall_seconds": 590.273,
+      "facts_per_minute_wall": 10.164788157344145
+    },
+    "with_jev": {
+      "facts": 100,
+      "llm_calls": 25,
+      "llm_input_tokens": 297555,
+      "llm_output_tokens": 19373,
+      "round_wall_seconds": 457.936,
+      "facts_per_minute_wall": 13.102,
+      "decision_requests": 105,
+      "decision_input_tokens": 351929,
+      "decision_batch_seconds_sum": 3.73,
+      "request_errors": 0,
+      "triage_fallback_warnings": 0,
+      "permanently_failed_facts": 0
+    },
+    "jev_price_usd_per_million_input_tokens": 0.042,
+    "estimated_jev_usd": 0.014781018
+  },
+  "limitations": [
+    "Different facts in sequential live-backlog rounds; not a controlled paired A/B test.",
+    "No complete semantic-quality evaluation was run.",
+    "Usage times public list pricing is a cost estimate, not an account invoice.",
+    "The main LLM uses an existing ChatGPT subscription; fewer calls primarily save quota and time."
+  ]
+}
