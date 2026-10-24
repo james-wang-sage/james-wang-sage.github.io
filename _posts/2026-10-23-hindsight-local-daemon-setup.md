@@ -257,7 +257,7 @@ By default the database lives in `~/.pg0/instances/hindsight-embed-coding-agent/
    lsof -p $(pgrep -f 'postgres -D .*hindsight-embed-coding-agent' | head -1) | grep -m1 hindsight-data
    ```
 
-4. Once everything works (Step 12), delete `$SRC.old`.
+4. Once everything works (Step 13), delete `$SRC.old`.
 
 Keep `~/projects/hindsight-data` **out of git and out of iCloud Drive or Dropbox**. Live syncing can corrupt a running database. To back it up, stop the daemon and copy the folder.
 
@@ -273,9 +273,43 @@ npx @vectorize-io/hindsight-coding-agents install claude-code codex --import-con
 - The import reads the agent's local transcripts and keeps only sessions whose **recorded working directory** is this repository.
 - It uses LLM tokens in proportion to the history (your ChatGPT plan here). It is safe to re-run, because documents are de-duplicated by id.
 - Git commit messages and a codebase survey are ingested automatically at the next session start. New commits are appended as they land, and the survey re-runs every 20 commits (`surveyRefreshCommits`).
-- `CLAUDE.md` and Claude Code's auto-memory notes (`~/.claude/projects/*/memory/*.md`) are not imported. `CLAUDE.md` is loaded into every session anyway. To store a memory note in the bank, ask the agent to save it with the `hindsight_ingest_document` tool.
+- `CLAUDE.md` and the agents' own memory notes are not imported. `CLAUDE.md` is loaded into every session anyway. Step 10 imports the memory notes.
 
-## Step 10 — Start fresh agent sessions
+## Step 10 — Import the agents' own memory notes
+
+Transcripts are the raw record. Each agent also keeps a curated memory of what it learned, and the plugin imports neither:
+
+| Agent | Where its memory lives | Shape |
+|---|---|---|
+| Claude Code | `~/.claude/projects/<repo path, every non-alphanumeric character as "-">/memory/`: a `MEMORY.md` index of `##` sections plus one `.md` file per note | Already one folder per repo |
+| Codex | `~/.codex/memories/MEMORY.md`, written while `generate_memories = true` under `[memories]` in `~/.codex/config.toml` | **One file for all repos.** Each `# Task Group:` lists the `cwd=` of the sessions it came from |
+
+You can ask an agent to copy these in with `hindsight_ingest_document`, and for a few notes that works. It does not scale. The agent reads every note into its context, then writes the full text back out as tool arguments, and it may paraphrase on the way. It also has no way to tell which notes changed since last time. A script that hands the files straight to the daemon avoids all three problems:
+
+```bash
+mkdir -p ~/bin
+curl -fsSL -o ~/bin/hindsight-sync-memory.py \
+  https://james-wang-sage.github.io/assets/scripts/hindsight-sync-memory.py
+python3 ~/bin/hindsight-sync-memory.py --check   # list what would change: no LLM calls, no writes
+python3 ~/bin/hindsight-sync-memory.py           # retain what changed, delete what is gone, wait for the jobs
+```
+
+The script talks to the daemon through the `hindsight` CLI, so point the CLI at the daemon first (Step 12). It needs only Python 3's standard library. Read it before you run it: [`hindsight-sync-memory.py`](/assets/scripts/hindsight-sync-memory.py).
+
+What it does:
+
+- **One document per unit, with a stable id.** Each `##` section of a Claude Code `MEMORY.md` becomes `claude-memory-<section>`. It holds the body of every note the section links to, verbatim, under a short header. Sections of an `ARCHIVE.md`, if you keep one, become `claude-memory-archive-<section>` and are labelled as history. Notes that no index links to go into `claude-memory-unindexed`. Each Codex task group becomes `codex-memory-<title>`. A re-run overwrites the same document instead of adding a copy.
+- **Routes Codex groups by `cwd`.** A group goes to `coding-agent::<repo>` when one of its `cwd=` paths contains the repo's directory name, which covers worktrees inside the repo. A group that touched two repos goes into both banks. Groups from scratch directories that have no bank are skipped and listed.
+- **Writes only to banks that already exist.** It never creates one, so it follows the opt-in choice you made in Step 2. A Claude Code memory folder is matched to a bank when its name ends with the repo's directory name. Folders that Claude Code creates for worktree sessions end with the worktree name instead, so they are skipped.
+- **Re-retains only what changed.** Hindsight stores each document's `content_hash` as the SHA-256 of its text. The script hashes the text it would send and skips every document that matches. It adds no dates of its own to the text and passes them as the retain timestamp instead, so an unchanged note never looks changed. A second run straight after the first prints `Up to date`.
+- **Deletes only its own leftovers.** When a section or task group disappears, its `claude-memory-*` or `codex-memory-*` document is deleted. Conversation, git and survey documents from the plugin are never touched.
+- **Leaves the rest of `~/.codex/memories/` alone.** `raw_memories.md` and `rollout_summaries/` are close to the transcripts Step 9 already imported. `memory_summary.md` is a profile that spans all repos, not one repo's knowledge.
+
+Codex remembers whatever you did in a repo's directory, including things that are not about the code. Before the first real run, read the `--check` list. To keep a task group out, add a regex for its title to `EXCLUDE_CODEX` at the top of the script. A group that was already imported is deleted on the next run.
+
+The first run retains everything, which on my machine was 74 documents across 3 banks. Extraction goes through your ChatGPT plan, the same as in Step 9. After that, only notes that changed cost anything. Codex rewrites its `MEMORY.md` as it works, and Claude Code adds notes as you go, so re-run the script now and then. `--check` makes no LLM calls, so it is cheap enough to run from a SessionStart hook that only warns.
+
+## Step 11 — Start fresh agent sessions
 
 The hooks read `~/.hindsight/coding-agent.json` every time they run. The MCP server behind the `hindsight_*` tools reads it **once, when it starts**. After installing, start new Claude Code and Codex sessions. In an already-open Claude Code session, run `/mcp` → `hindsight` → **Reconnect**.
 
@@ -289,7 +323,7 @@ In a new session you should see the Hindsight memory banner. The tools the agent
 | `hindsight_capture_initiative` | Track a new feature or plan as its own page |
 | `hindsight_sync_status` / `hindsight_diagnose` | Check ingestion status and configuration |
 
-## Step 11 — Point the CLI at the daemon
+## Step 12 — Point the CLI at the daemon
 
 Without configuration the `hindsight` CLI targets `http://localhost:8888`. Point it at the daemon:
 
@@ -341,7 +375,7 @@ hindsight memory recall 'coding-agent::other-repo' "deployment steps" -t world,e
 
 - If some of your repos must never inform each other, write that rule next to it. Separate banks keep the data apart, but the agent can still bridge them with this command. The CLI query is the only path across banks, so the rule only has to govern that one command.
 
-## Step 12 — Generate the knowledge pages
+## Step 13 — Generate the knowledge pages
 
 A new bank's pages show "No content yet." until their first hourly slot comes, which can take up to an hour. To build them right away (this only uses your ChatGPT plan):
 
@@ -355,7 +389,7 @@ hindsight operation list $B          # wait for the refresh_mental_model jobs to
 
 From then on, each page refreshes at most once an hour, and only when there is new material.
 
-## Step 13 — The web UI
+## Step 14 — The web UI
 
 The CLI can launch Hindsight's web control plane (`@vectorize-io/hindsight-control-plane`, a Next.js app) against the API URL in your CLI config, which is the daemon. It needs Node.js.
 
@@ -403,6 +437,7 @@ For a quick look without a browser, `hindsight explore` opens a terminal explore
 - [ ] `~/.pg0/instances/hindsight-embed-coding-agent` → symlink to `~/projects/hindsight-data/…`; PostgreSQL has files open there
 - [ ] Per repo: `status.js --repo …` shows `synced: true`, `pagesCount: 5`, `surveyDocs: 4`; `hindsight operation list` shows nothing `failed`
 - [ ] In a new agent session, `hindsight_sync_status` returns the same numbers as `status.js`
+- [ ] `python3 ~/bin/hindsight-sync-memory.py --check` prints `Up to date`
 - [ ] Web UI launched only with `HOSTNAME=127.0.0.1` and `HINDSIGHT_CP_ACCESS_KEY`, and stopped when not in use (nothing listening on `:9999`)
 
 ## Uninstall
