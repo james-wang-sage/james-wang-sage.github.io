@@ -14,6 +14,10 @@ under those two id prefixes that no longer have a source are deleted; nothing el
 Codex raw_memories.md / rollout_summaries/ (transcript-grade) and memory_summary.md (a global
 profile, not per-repo) are deliberately not mirrored.
 
+Codex task groups whose title matches a line of ~/.hindsight/memory-sync-exclude (one regex per line,
+case-insensitive; blank lines and # comments ignored) are never mirrored; one already imported is
+deleted on the next sync. Keep it there, not in this file, so every copy of the script honours it.
+
   hindsight-sync-memory.py              retain changed docs, delete orphans, wait, print a summary
   hindsight-sync-memory.py --check      list what would change; no LLM calls, no writes; exit 0
   hindsight-sync-memory.py --all        re-retain every doc
@@ -40,9 +44,14 @@ CTX_CLAUDE = ("Claude Code auto-memory for this repo: curated notes the agent sa
               "Each fact reflects when its file was written.")
 CTX_CODEX = ("Codex consolidated memory (~/.codex/memories/MEMORY.md) for this repo: one task group of "
              "past Codex work. Each fact reflects when that task ran.")
-# Codex task groups never mirrored (regex on the title, case-insensitive), e.g. (r"personal", r"1:1").
-# An excluded group's existing doc becomes an orphan and is deleted on the next sync.
-EXCLUDE_CODEX = ()
+EXCLUDE_FILE = f"{HOME}/.hindsight/memory-sync-exclude"
+
+
+def exclusions():
+    if not os.path.exists(EXCLUDE_FILE):
+        return []
+    lines = (l.strip() for l in open(EXCLUDE_FILE, encoding="utf-8"))
+    return [l for l in lines if l and not l.startswith("#")]
 
 
 def hs(*args):
@@ -134,10 +143,10 @@ def codex_docs(banks):
     """{bank: {doc id: (body, ctx, ts)}}, plus the titles of groups that map to no bank."""
     text = open(CODEX_MEMORY, encoding="utf-8").read()
     groups = re.split(r"(?m)^(?=# Task Group: )", text)[1:]
-    out, skipped = {}, []
+    out, skipped, exclude = {}, [], exclusions()
     for g in groups:
         title = g.splitlines()[0].removeprefix("# Task Group: ").strip()
-        if any(re.search(p, title, re.I) for p in EXCLUDE_CODEX):
+        if any(re.search(p, title, re.I) for p in exclude):
             skipped.append(f"{title} [excluded]")
             continue
         cwds = {c.rstrip(";,)/") for c in re.findall(r"cwd=([^\s,]+)", g)}
@@ -186,7 +195,7 @@ def main():
     # local[bank][doc id] = (body, ctx, ts); `owned` = prefixes whose source was read for that bank,
     # so orphans are only computed where a source actually exists.
     local, owned = {}, {}
-    for d in sorted(os.listdir(CLAUDE_PROJECTS)):
+    for d in sorted(os.listdir(CLAUDE_PROJECTS) if os.path.isdir(CLAUDE_PROJECTS) else []):
         memdir = os.path.join(CLAUDE_PROJECTS, d, "memory")
         b = claude_bank(d, banks)
         if b and os.path.exists(os.path.join(memdir, "MEMORY.md")):
