@@ -267,8 +267,7 @@ From inside each opted-in repository:
 
 ```bash
 cd ~/projects/my-repo
-npx @vectorize-io/hindsight-coding-agents install claude-code --import-conversations
-# and/or: ... install codex --import-conversations
+npx @vectorize-io/hindsight-coding-agents install claude-code codex --import-conversations
 ```
 
 - The import reads the agent's local transcripts and keeps only sessions whose **recorded working directory** is this repository.
