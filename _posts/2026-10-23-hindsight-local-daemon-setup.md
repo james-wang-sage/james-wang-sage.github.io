@@ -287,11 +287,10 @@ Transcripts are the raw record. Each agent also keeps a curated memory of what i
 You can ask an agent to copy these in with `hindsight_ingest_document`, and for a few notes that works. It does not scale. The agent reads every note into its context, then writes the full text back out as tool arguments, and it may paraphrase on the way. It also has no way to tell which notes changed since last time. A script that hands the files straight to the daemon avoids all three problems:
 
 ```bash
-mkdir -p ~/bin
-curl -fsSL -o ~/bin/hindsight-sync-memory.py \
+curl -fsSL -o ~/.hindsight/hindsight-sync-memory.py \
   https://james-wang-sage.github.io/assets/scripts/hindsight-sync-memory.py
-python3 ~/bin/hindsight-sync-memory.py --check   # list what would change: no LLM calls, no writes
-python3 ~/bin/hindsight-sync-memory.py           # retain what changed, delete what is gone, wait for the jobs
+python3 ~/.hindsight/hindsight-sync-memory.py --check   # list what would change: no LLM calls, no writes
+python3 ~/.hindsight/hindsight-sync-memory.py           # retain what changed, delete what is gone, wait for the jobs
 ```
 
 The script talks to the daemon through the `hindsight` CLI, so point the CLI at the daemon first (Step 12). It needs only Python 3's standard library. Read it before you run it: [`hindsight-sync-memory.py`](/assets/scripts/hindsight-sync-memory.py).
@@ -437,7 +436,7 @@ For a quick look without a browser, `hindsight explore` opens a terminal explore
 - [ ] `~/.pg0/instances/hindsight-embed-coding-agent` → symlink to `~/projects/hindsight-data/…`; PostgreSQL has files open there
 - [ ] Per repo: `status.js --repo …` shows `synced: true`, `pagesCount: 5`, `surveyDocs: 4`; `hindsight operation list` shows nothing `failed`
 - [ ] In a new agent session, `hindsight_sync_status` returns the same numbers as `status.js`
-- [ ] `python3 ~/bin/hindsight-sync-memory.py --check` prints `Up to date`
+- [ ] `python3 ~/.hindsight/hindsight-sync-memory.py --check` prints `Up to date`
 - [ ] Web UI launched only with `HOSTNAME=127.0.0.1` and `HINDSIGHT_CP_ACCESS_KEY`, and stopped when not in use (nothing listening on `:9999`)
 
 ## Uninstall
