@@ -21,6 +21,7 @@ deleted on the next sync. Keep it there, not in this file, so every copy of the 
   hindsight-sync-memory.py              retain changed docs, delete orphans, wait, print a summary
   hindsight-sync-memory.py --check      list what would change; no LLM calls, no writes; exit 0
   hindsight-sync-memory.py --all        re-retain every doc
+  hindsight-sync-memory.py --quiet      --check that prints nothing when up to date (for a SessionStart hook)
   ... --bank my-repo                    limit to one bank (repeatable)
 """
 import argparse
@@ -181,6 +182,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--all", action="store_true")
+    ap.add_argument("--quiet", action="store_true", help="implies --check; no output when up to date")
     ap.add_argument("--bank", action="append", help="repo name, e.g. my-repo")
     a = ap.parse_args()
 
@@ -219,6 +221,14 @@ def main():
             if doc_id.startswith(tuple(owned[b])) and doc_id not in local.get(b, {}):
                 plan.append((b, "orphan", doc_id))
 
+    if a.quiet:
+        if plan:
+            n = sum(1 for p in plan if p[1] != "orphan")
+            print(f"Hindsight memory mirror is out of date: {n} to retain, {len(plan) - n} to delete.")
+            for b, act, doc_id in plan:
+                print(f"  {act:8} coding-agent::{b}  {doc_id}")
+            print("  Refresh: python3 ~/.hindsight/hindsight-sync-memory.py")
+        return 0
     big = max((len(v[0].encode()) for docs in local.values() for v in docs.values()), default=0)
     print(f"Codex task groups: {ngroups}, skipped (no existing bank or excluded): {len(skipped)}. Largest doc: {big // 1024} KB.")
     for t in skipped:

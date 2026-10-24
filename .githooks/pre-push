@@ -1,0 +1,39 @@
+#!/bin/bash
+# Pushing main publishes the site. Block the push when a pushed post or asset carries internal-looking
+# content (employer hostnames and markers, secrets, a real home path): the same check as the devto
+# skill's publish guard. Enable once per clone:  git config core.hooksPath .githooks
+set -euo pipefail
+
+scan="$HOME/projects/claude.skills/skills/devto/scripts/devto.ts"
+if ! command -v bun >/dev/null || [ ! -f "$scan" ]; then
+  echo "pre-push: the internal-content scan needs bun and $scan; push blocked" >&2
+  exit 1
+fi
+
+zero=0000000000000000000000000000000000000000
+text='\.(md|markdown|html?|py|js|json|ya?ml|txt|s?css|svg|sh)$'
+tmp=$(mktemp -d)
+trap 'rm -rf "$tmp"' EXIT
+n=0
+
+while read -r _ local_sha _ remote_sha; do
+  [ "$local_sha" = "$zero" ] && continue # branch deletion
+  if [ "$remote_sha" = "$zero" ]; then
+    files=$(git ls-tree -r --name-only "$local_sha" -- _posts assets)
+  else
+    files=$(git diff --name-only --diff-filter=AM "$remote_sha" "$local_sha" -- _posts assets)
+  fi
+  # Scan the pushed commit's content, not the working tree.
+  for f in $(printf '%s\n' "$files" | grep -E "$text" || true); do
+    mkdir -p "$tmp/$(dirname "$f")"
+    git show "$local_sha:$f" >"$tmp/$f"
+    n=$((n + 1))
+  done
+done
+
+[ "$n" -eq 0 ] && exit 0
+cd "$tmp"
+if ! out=$(bun "$scan" scan $(find _posts assets -type f 2>/dev/null)); then
+  printf 'pre-push: internal-looking content would go public:\n%s\nEdit it out, or push only after the owner confirms these lines.\n' "$out" >&2
+  exit 1
+fi

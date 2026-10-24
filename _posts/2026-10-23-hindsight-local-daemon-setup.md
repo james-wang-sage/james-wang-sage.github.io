@@ -306,7 +306,7 @@ What it does:
 
 Codex remembers whatever you did in a repo's directory, including things that are not about the code. Before the first real run, read the `--check` list. To keep a task group out, add a regex for its title as a line of `~/.hindsight/memory-sync-exclude` (case-insensitive; blank lines and `#` comments are ignored). A group that was already imported is deleted on the next run. The list lives outside the script, so a fresh download of the script still honours it.
 
-The first run retains everything, which on my machine was 74 documents across 3 banks. Extraction goes through your ChatGPT plan, the same as in Step 9. After that, only notes that changed cost anything. Codex rewrites its `MEMORY.md` as it works, and Claude Code adds notes as you go, so re-run the script now and then. `--check` makes no LLM calls, so it is cheap enough to run from a SessionStart hook that only warns.
+The first run retains everything, which on my machine was 74 documents across 3 banks. Extraction goes through your ChatGPT plan, the same as in Step 9. After that, only notes that changed cost anything. Codex rewrites its `MEMORY.md` as it works, and Claude Code adds notes as you go, so re-run the script now and then. `--check` makes no LLM calls. For a SessionStart hook that only warns, use `--quiet`: a `--check` that prints nothing while everything is up to date.
 
 ## Step 11 — Start fresh agent sessions
 
