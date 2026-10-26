@@ -3,7 +3,7 @@ layout: post
 title: "Hindsight Consolidation Settings: Low Reasoning, Batch 8, and Jev"
 date: 2026-10-24
 tags: [ai, hindsight, decision-models, performance]
-description: "The configuration I kept after testing Hindsight consolidation: low reasoning, eight facts per batch, and Jev triage for one opted-in bank, with measured costs and limitations."
+description: "The Hindsight configuration I kept after testing: low-reasoning consolidation with Jev triage for one bank, then a remote Voyage reranker and a Jev-orchestrated reflect, with measured costs and limitations."
 image: /assets/images/2026-10-24-hindsight-consolidation-settings-cover.jpg
 ---
 
@@ -14,6 +14,8 @@ After setting up a shared Hindsight daemon for my coding agents, I ran into the 
 The configuration I kept is **low reasoning for consolidation, eight facts per LLM batch, and TypeSafe Jev as a decision model for one opted-in bank**. The main LLM remains `gpt-6-luna` through Hindsight's `chatgpt` provider.
 
 This is a follow-up to my [local daemon setup guide](/2026/10/23/hindsight-local-daemon-setup.html). It covers the settings and an operational tuning session on October 24, 2026, using Hindsight API 1.1.0 and coding-agents integration 0.8.2 on macOS. It is not a controlled model benchmark or proof that these settings are optimal for every bank.
+
+> **Update, October 25, 2026:** I later gave `reflect` its own LLM and Jev decision route and replaced the local reranker with a remote one. Unlike consolidation, the reflect decision model is on for every bank by default. Those changes, and two routing experiments I dropped, are in the [October 25 update](#update-october-25-reflect-and-recall).
 
 ## What consolidation gives me
 
@@ -35,7 +37,7 @@ Consolidation is useful for long-lived project memory, but it is not required be
 | Memories per consolidation round | `100`, unchanged |
 | Consolidation decision provider | `typesafe` |
 | Decision model alias | `jev-latest` |
-| Jev scope | One opted-in project bank |
+| Jev scope for consolidation | One opted-in project bank |
 
 The alias resolved to `jev-1.14.0` in the connectivity tests. That identifies what answered then; a moving alias is not a version pin. [TypeSafe model aliases](https://docs.typesafe.ai/models#aliases)
 
@@ -77,7 +79,7 @@ HINDSIGHT_API_CONSOLIDATION_USE_DECISION_MODEL=false
 
 Replace the placeholder with the real TypeSafe key in the local profile and keep the file owner-readable only. I already had the key in `JEV_API_KEY`; Hindsight's configured credential is the operation-specific variable shown above. The example contains no usable credential.
 
-The provider, model, and credential overrides are for **consolidation**. I did not set a global decision provider, so this change does not switch recall, reflect, or reranking to Jev. [Hindsight decision-model configuration](https://hindsight.vectorize.io/developer/configuration#decision-model)
+The provider, model, and credential overrides above are for **consolidation** only. I did not set a global decision provider, so this block by itself does not switch recall or reflect to Jev. [Hindsight decision-model configuration](https://hindsight.vectorize.io/developer/configuration#decision-model) Reflect later got its own decision-model route; see the [October 25 update](#update-october-25-reflect-and-recall).
 
 After changing the profile, restart the daemon through its normal manager and verify the new process is ready. During this session, the stop command's short wait expired while a request was still finishing. I checked the old process had exited and the replacement was healthy before treating the restart as complete.
 
@@ -178,6 +180,114 @@ That is about **1.5 cents of added Jev API usage per 100 facts** in this sample.
 
 The main LLM uses my existing ChatGPT plan. Fewer calls primarily save plan quota and processing time; they do not reimburse the added Jev bill. At this workload's rate, a backlog of roughly 2,450 facts would add about $0.36 of Jev usage. Different context sizes, retries, or new incoming work change that estimate.
 
+## Update, October 25: reflect and recall
+
+The consolidation settings above did not change. Late on October 24, running into the early hours of October 25, I turned to the interactive side, because `reflect` answers felt slow. One logged reflect spent 28.7 seconds in model calls and 0.22 seconds in its retrieval tools. The time was going to the remote model, not to the laptop.
+
+These settings were added to the same profile:
+
+| Setting | Effective value |
+|---|---|
+| Reflect LLM provider | `openrouter`, automatic upstream routing |
+| Reflect LLM model | `openai/gpt-oss-120b` |
+| Reflect reasoning effort | `low` |
+| Reflect decision provider | `typesafe` |
+| Reflect decision model alias | `jev-latest` |
+| Reranker provider | `openrouter` |
+| Reranker model | `voyageai/rerank-3-lite` |
+
+```dotenv
+# ~/.hindsight/profiles/coding-agent.env (additions)
+
+# Reflect gets its own LLM route. Retain and consolidation keep the main chatgpt route.
+HINDSIGHT_API_REFLECT_LLM_PROVIDER=openrouter
+HINDSIGHT_API_REFLECT_LLM_MODEL=openai/gpt-oss-120b
+HINDSIGHT_API_REFLECT_LLM_REASONING_EFFORT=low
+HINDSIGHT_API_REFLECT_LLM_API_KEY=YOUR_OPENROUTER_API_KEY
+
+# Reflect decision model. On for every bank unless a bank opts out.
+HINDSIGHT_API_REFLECT_DECISION_MODEL_PROVIDER=typesafe
+HINDSIGHT_API_REFLECT_DECISION_MODEL_MODEL=jev-latest
+HINDSIGHT_API_REFLECT_DECISION_MODEL_BASE_URL=https://api.typesafe.ai
+HINDSIGHT_API_REFLECT_DECISION_MODEL_API_KEY=YOUR_TYPESAFE_API_KEY
+
+# Remote reranker through OpenRouter's rerank endpoint.
+HINDSIGHT_API_RERANKER_PROVIDER=openrouter
+HINDSIGHT_API_RERANKER_OPENROUTER_MODEL=voyageai/rerank-3-lite
+HINDSIGHT_API_RERANKER_OPENROUTER_BASE_URL=https://openrouter.ai/api/v1/rerank
+HINDSIGHT_API_RERANKER_OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
+```
+
+The biggest operational change is not a number: reflect answers are now written by `gpt-oss-120b` on a pay-per-token route, not by the `gpt-6-luna` model on my ChatGPT plan. The reranker also sends each query and its candidate memory text to OpenRouter and the upstream reranking provider. Embeddings stay local.
+
+### Moving the reflect LLM alone was not faster
+
+I picked `gpt-oss-120b` after a published leaderboard listed the Groq-served model at an average of 2.2 seconds of total reflect time. I had no Groq key, so I routed it through my existing OpenRouter key. Three complete reflects took 23.4, 30.4, and 34.0 seconds, no better than the 28.7-second example. OpenRouter was choosing the upstream provider automatically.
+
+Pinning OpenRouter to Groq passed an authentication check, but complete reflects then failed repeatedly with tool-call validation errors. I reverted to automatic routing. The model route stayed because the next two changes were measured on it; it is not a speed improvement by itself.
+
+### Remote reranking
+
+Recall was the other slow step. With the default local reranker, `cross-encoder/ms-marco-MiniLM-L-6-v2` on CPU, one recall over 300 candidates had a median of 4.56 seconds, and reranking alone took 4.39 of them. With OpenRouter's `cohere/rerank-v3.5`, the recall median fell to 0.90 seconds and reranking to 0.72 seconds: an **80.2% reduction** in recall time. That test used three repository queries, two repetitions each per provider, on the live bank. [Hindsight reranker configuration](https://hindsight.vectorize.io/developer/configuration)
+
+Cohere v3.5 bills by search unit, and one 300-candidate call cost four units: $0.004. I then compared reranker models alone, on a fixed set of 300 documents for each of three repository queries, two repetitions each:
+
+| Model | Median time | Median API-reported cost per call | Successful calls |
+|---|---:|---:|---:|
+| Local MiniLM-L6 on CPU | 4.19 s | $0 | 6/6 |
+| `voyageai/rerank-3-lite` | 0.72 s | $0.00105 | 6/6 |
+| `cohere/rerank-v3.5` | 0.77 s | $0.00400 | 6/6 |
+| `cohere/rerank-4-fast` | 0.79 s | $0.00800 | 6/6 |
+| `qwen/qwen3-reranker-8b` | 2.37 s | $0.01626 | 1/6, others HTTP 503 |
+
+Voyage matched Cohere's speed at about a quarter of the cost, so I switched to it. The costs are what OpenRouter reported for these calls, not list prices. Local model load time is excluded; remote times include network setup.
+
+This is not a quality ranking. The repository queries have no labelled answers, and the models ordered the candidates differently. On a small synthetic probe with one known answer, every model that returned a result put that answer first. A recall in the live log later that day scored 300 candidates in 1.27 seconds.
+
+### The reflect decision model
+
+The same TypeSafe Jev model can orchestrate reflect. When it is enabled, the retrieval layers run together in one round, the decision model prunes the evidence, and it judges whether that evidence already answers the question. If it does, reflect skips the main LLM's layer-by-layer tool turns. The main LLM still writes the answer, and a decision-model error falls back to the normal agent turns. [Reflect agent implementation](https://github.com/vectorize-io/hindsight/blob/main/hindsight-api-slim/hindsight_api/engine/reflect/agent.py)
+
+I compared it with the bank setting switched off and on, interleaved, at the high reflect budget: two fixed questions with two repetitions each, so four requests per side.
+
+| Per reflect | Decision model off | Decision model on |
+|---|---:|---:|
+| Median time | 14.0 s | 5.78 s |
+| Median main LLM calls | 5 | 2 |
+| Answers passing a basic check | 4/4 | 4/4 |
+
+The median fell by about 59%. One request with the decision model still took 14.8 seconds. Four requests per side is a small sample, the basic check is not a quality grade, and I did not measure the added Jev cost for reflect.
+
+**The scope differs from consolidation.** Consolidation needed a bank to opt in. For reflect, the installed configuration defaults `reflect_use_decision_model` to true: setting up a reflect decision provider turns it on for every bank, and a bank opts out. Knowledge-page refreshes have their own switches, also on by default, and use the same reflect decision route. [Configuration defaults](https://github.com/vectorize-io/hindsight/blob/main/hindsight-api-slim/hindsight_api/config.py) To keep a bank off the Jev route for reflect:
+
+```bash
+BANK_ID='coding-agent::example-repo'
+
+curl --fail-with-body --silent --show-error \
+  -X PATCH \
+  "http://127.0.0.1:9077/v1/default/banks/${BANK_ID}/config" \
+  -H 'Content-Type: application/json' \
+  -d '{"updates":{"reflect_use_decision_model":false}}'
+```
+
+I left it on for all banks. In the daemon log covering the trials and the following day, 19 reflects completed through the decision model with no logged decision-model failure; two of them are the empty Cerebras answers described below. OpenRouter's automatic routing did surface intermittent upstream provider errors. Hindsight retried them; one query-rewrite call still failed after its fourth attempt, and that reflect fell back to searching the question as written and completed.
+
+### Why Cerebras did not stay
+
+Cerebras serves `gpt-oss-120b` quickly, so I also pinned the reflect route to it, with fallbacks off, keeping the Jev and Voyage settings. Three questions, two repetitions each:
+
+| Median reflect time | Automatic routing | Cerebras only |
+|---|---:|---:|
+| Short factual question A | 13.0 s | 2.97 s |
+| Short factual question B | 7.07 s | 2.00 s |
+| Broad summary question | 36.1 s | Empty answer, both runs |
+
+On a fixed prompt, Cerebras answered in 0.57 seconds against 3.74 seconds, but its mean API-reported cost per call was about 9.3 times higher: $0.00139 against $0.000148.
+
+The empty answers decided it. The query-rewrite stage classified the summary question as needing no retrieval, and the request returned HTTP 200 with no text. A faster route that silently returns nothing for broad questions is a regression.
+
+One operational trap: the daemon manager wrote the trial routing override into the profile, so it survived the trial. I removed it by hand and restarted. After any temporary trial, read the effective profile before trusting it.
+
 ## How I will judge the next change
 
 I kept **Jev, low reasoning, and batch eight** because this run showed a useful operational improvement at a small measured added cost. I kept Jev limited to the bank being tested.
@@ -186,4 +296,4 @@ For the next change, I want the same starting observations and fact corpus on bo
 
 The useful outcome is a memory bank that stays current at an acceptable cost. A shorter model response or a faster first few batches is only one part of that result.
 
-The [measurement summary](/assets/data/2026-10-24-hindsight-consolidation-settings.json) includes the configuration, counters, timing definitions, and limitations used for the calculations in this post.
+The [measurement summary](/assets/data/2026-10-24-hindsight-consolidation-settings.json) includes the configuration, counters, timing definitions, and limitations used for the calculations in this post, including the October 25 reranker, reflect, and Cerebras comparisons.

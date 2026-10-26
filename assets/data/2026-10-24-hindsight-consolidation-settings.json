@@ -61,5 +61,139 @@
     "No complete semantic-quality evaluation was run.",
     "Usage times public list pricing is a cost estimate, not an account invoice.",
     "The main LLM uses an existing ChatGPT subscription; fewer calls primarily save quota and time."
-  ]
+  ],
+  "update_2026_10_25": {
+    "measured_date": "2026-10-24 to 2026-10-25 (America/Los_Angeles)",
+    "configuration_added": {
+      "reflect_llm_provider": "openrouter",
+      "reflect_llm_model": "openai/gpt-oss-120b",
+      "reflect_llm_routing": "automatic",
+      "reflect_reasoning": "low",
+      "reflect_decision_provider": "typesafe",
+      "reflect_decision_model_alias": "jev-latest",
+      "reflect_use_decision_model_default": true,
+      "reranker_provider": "openrouter",
+      "reranker_model": "voyageai/rerank-3-lite",
+      "reranker_endpoint": "https://openrouter.ai/api/v1/rerank"
+    },
+    "reflect_llm_move": {
+      "baseline_logged_reflect_model_seconds": 28.7,
+      "baseline_logged_reflect_tool_seconds": 0.22,
+      "openrouter_auto_full_reflect_seconds": [
+        23.4,
+        30.4,
+        34.0
+      ],
+      "groq_pin": "Dropped: repeated tool-call validation errors on full reflects."
+    },
+    "recall_rerank_ab": {
+      "method": "3 repository queries x 2 repetitions per provider, low recall budget, 300-candidate cap, live bank",
+      "local": {
+        "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+        "median_recall_seconds": 4.562,
+        "median_rerank_seconds": 4.3855
+      },
+      "remote": {
+        "model": "cohere/rerank-v3.5",
+        "median_recall_seconds": 0.9015,
+        "median_rerank_seconds": 0.7187
+      },
+      "reduction_percent": 80.2,
+      "cohere_probe_300_candidates": {
+        "search_units": 4,
+        "cost_usd": 0.004
+      }
+    },
+    "reranker_only_comparison": {
+      "method": "Fixed 300-document sets, 3 repository queries x 2 repetitions; costs as reported by the API",
+      "repository_results": [
+        {
+          "model": "local/MiniLM-L6",
+          "successes": "6/6",
+          "median_seconds": 4.1917,
+          "median_cost_usd": 0
+        },
+        {
+          "model": "voyageai/rerank-3-lite",
+          "successes": "6/6",
+          "median_seconds": 0.7196,
+          "median_cost_usd": 0.00105302
+        },
+        {
+          "model": "cohere/rerank-v3.5",
+          "successes": "6/6",
+          "median_seconds": 0.7672,
+          "median_cost_usd": 0.004
+        },
+        {
+          "model": "cohere/rerank-4-fast",
+          "successes": "6/6",
+          "median_seconds": 0.793,
+          "median_cost_usd": 0.008
+        },
+        {
+          "model": "qwen/qwen3-reranker-8b",
+          "successes": "1/6",
+          "median_seconds": 2.3744,
+          "median_cost_usd": 0.016256,
+          "errors": "HTTP 503 service overloaded"
+        }
+      ],
+      "synthetic_probe": "Every model that returned a result ranked the known answer first."
+    },
+    "reflect_decision_ab": {
+      "method": "2 fixed questions x 2 repetitions, interleaved bank setting off/on, high budget",
+      "off": {
+        "median_seconds": 14.0005,
+        "median_main_llm_calls": 5,
+        "basic_checks_passed": "4/4"
+      },
+      "on": {
+        "median_seconds": 5.777,
+        "median_main_llm_calls": 2,
+        "basic_checks_passed": "4/4",
+        "decision_traces": "4/4",
+        "seconds": [
+          6.43,
+          5.124,
+          3.934,
+          14.81
+        ]
+      }
+    },
+    "cerebras_ab": {
+      "method": "3 fixed high-budget questions x 2 repetitions; Jev and Voyage retained",
+      "auto": {
+        "case_medians_seconds": {
+          "short_question_a": 13.034,
+          "short_question_b": 7.0695,
+          "broad_summary": 36.1125
+        },
+        "valid_answers": "6/6"
+      },
+      "cerebras_only": {
+        "case_medians_seconds": {
+          "short_question_a": 2.9725,
+          "short_question_b": 2.0015,
+          "broad_summary": null
+        },
+        "valid_answers": "4/6",
+        "empty_answers": "2 (query rewrite judged no retrieval needed; HTTP 200, empty text)"
+      },
+      "fixed_prompt": {
+        "auto_median_seconds": 3.7435,
+        "auto_mean_cost_usd": 0.000148434,
+        "cerebras_median_seconds": 0.5745,
+        "cerebras_mean_cost_usd": 0.001387525
+      },
+      "outcome": "Dropped; trial override had been persisted to the profile and was removed by hand."
+    },
+    "limitations": [
+      "Small sequential samples on a live bank; no upstream isolation.",
+      "No labelled quality set for repository rerank queries; rankings differ between models.",
+      "Basic answer checks are not a quality grade.",
+      "Added Jev cost for reflect was not measured.",
+      "Costs are API-reported usage for the test calls, not invoices or list prices."
+    ]
+  }
 }
