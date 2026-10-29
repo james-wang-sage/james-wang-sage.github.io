@@ -3,7 +3,7 @@ layout: post
 title: "Hindsight Consolidation Settings: Low Reasoning, Batch 8, and Jev"
 date: 2026-10-24
 tags: [ai, hindsight, decision-models, performance]
-description: "The Hindsight configuration I kept after testing: low-reasoning consolidation with Jev triage for one bank, then a remote Voyage reranker and a Jev-orchestrated reflect, with measured costs and limitations."
+description: "The Hindsight configuration I kept after testing: low-reasoning consolidation with Jev triage for one bank, then a remote reranker and a Jev-orchestrated reflect, with measured costs and limitations."
 image: /assets/images/2026-10-24-hindsight-consolidation-settings-cover.jpg
 ---
 
@@ -16,6 +16,8 @@ The configuration I kept is **low reasoning for consolidation, eight facts per L
 This is a follow-up to my [local daemon setup guide](/2026/10/23/hindsight-local-daemon-setup.html). It covers the settings and an operational tuning session on October 24, 2026, using Hindsight API 1.1.0 and coding-agents integration 0.8.2 on macOS. It is not a controlled model benchmark or proof that these settings are optimal for every bank.
 
 > **Update, October 25, 2026:** I later gave `reflect` its own LLM and Jev decision route and replaced the local reranker with a remote one. Unlike consolidation, the reflect decision model is on for every bank by default. Those changes, and two routing experiments I dropped, are in the [October 25 update](#update-october-25-reflect-and-recall).
+
+> **Update, October 29, 2026:** The current reranker is `cohere/rerank-4-fast` through OpenRouter, replacing Voyage after upstream rate-limit failures. The configuration example below is updated; the October 25 measurements remain historical. See the [October 29 update](#update-october-29-replace-the-rate-limited-reranker).
 
 ## What consolidation gives me
 
@@ -184,7 +186,7 @@ The main LLM uses my existing ChatGPT plan. Fewer calls primarily save plan quot
 
 The consolidation settings above did not change. Late on October 24, running into the early hours of October 25, I turned to the interactive side, because `reflect` answers felt slow. One logged reflect spent 28.7 seconds in model calls and 0.22 seconds in its retrieval tools. The time was going to the remote model, not to the laptop.
 
-These settings were added to the same profile:
+These settings were added to the same profile. The reranker entry now shows the October 29 replacement; the other entries are unchanged:
 
 | Setting | Effective value |
 |---|---|
@@ -194,7 +196,7 @@ These settings were added to the same profile:
 | Reflect decision provider | `typesafe` |
 | Reflect decision model alias | `jev-latest` |
 | Reranker provider | `openrouter` |
-| Reranker model | `voyageai/rerank-3-lite` |
+| Reranker model | `cohere/rerank-4-fast` |
 
 ```dotenv
 # ~/.hindsight/profiles/coding-agent.env (additions)
@@ -211,9 +213,9 @@ HINDSIGHT_API_REFLECT_DECISION_MODEL_MODEL=jev-latest
 HINDSIGHT_API_REFLECT_DECISION_MODEL_BASE_URL=https://api.typesafe.ai
 HINDSIGHT_API_REFLECT_DECISION_MODEL_API_KEY=YOUR_TYPESAFE_API_KEY
 
-# Remote reranker through OpenRouter's rerank endpoint.
+# Remote reranker through OpenRouter's rerank endpoint (updated October 29).
 HINDSIGHT_API_RERANKER_PROVIDER=openrouter
-HINDSIGHT_API_RERANKER_OPENROUTER_MODEL=voyageai/rerank-3-lite
+HINDSIGHT_API_RERANKER_OPENROUTER_MODEL=cohere/rerank-4-fast
 HINDSIGHT_API_RERANKER_OPENROUTER_BASE_URL=https://openrouter.ai/api/v1/rerank
 HINDSIGHT_API_RERANKER_OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
 ```
@@ -288,6 +290,22 @@ The empty answers decided it. The query-rewrite stage classified the summary que
 
 One operational trap: the daemon manager wrote the trial routing override into the profile, so it survived the trial. I removed it by hand and restarted. After any temporary trial, read the effective profile before trusting it.
 
+## Update, October 29: replace the rate-limited reranker
+
+Voyage's reranking route began returning HTTP 429. Those retrieval failures caused complete reflect requests to return HTTP 500, even though the daemon and database were healthy. I replaced `voyageai/rerank-3-lite` with **`cohere/rerank-4-fast`**, still using the same OpenRouter endpoint and key. OpenRouter reports Cohere as the upstream provider for the replacement. [Cohere 4 Fast on OpenRouter](https://openrouter.ai/cohere/rerank-4-fast)
+
+Before switching, I tested two fixed synthetic queries, each against 300 documents, with three repetitions per model. Each query had one independently specified correct document:
+
+| Model | Successful calls | Mean successful-call time | API-reported cost per successful call |
+|---|---:|---:|---:|
+| `cohere/rerank-4-fast` | 6/6 | 0.72 s | $0.006 |
+| `cohere/rerank-v3.5` | 6/6 | 1.10 s | $0.003 |
+| `qwen/qwen3-reranker-8b` | 4/6; two HTTP 503s | 1.86 s | About $0.0078 |
+
+Every successful response ranked its query's correct document first. Both Cohere models reported three search units per call in this fixture. These costs differ from the October 25 measurements because the documents differ; 300 documents do not guarantee the same billable workload. This is a small availability and ranking check, not a general quality comparison or a sustained-load test.
+
+I kept 4 Fast for its lower latency in this sample. After updating the profile and restarting the daemon, three simple reflect probes all returned the expected answers: **10.84, 8.88, and 6.49 seconds**, averaging **8.74 seconds**. Those are complete reflect times, distinct from the reranker-only times in the table. They verify recovery, not a controlled speedup against the earlier failed requests. An explicit refresh also restored a previously paused knowledge page.
+
 ## How I will judge the next change
 
 I kept **Jev, low reasoning, and batch eight** because this run showed a useful operational improvement at a small measured added cost. I kept Jev limited to the bank being tested.
@@ -296,4 +314,4 @@ For the next change, I want the same starting observations and fact corpus on bo
 
 The useful outcome is a memory bank that stays current at an acceptable cost. A shorter model response or a faster first few batches is only one part of that result.
 
-The [measurement summary](/assets/data/2026-10-24-hindsight-consolidation-settings.json) includes the configuration, counters, timing definitions, and limitations used for the calculations in this post, including the October 25 reranker, reflect, and Cerebras comparisons.
+The [measurement summary](/assets/data/2026-10-24-hindsight-consolidation-settings.json) includes the configuration, counters, timing definitions, and limitations used for the calculations in this post, including the October 25 comparisons and the October 29 reranker replacement.

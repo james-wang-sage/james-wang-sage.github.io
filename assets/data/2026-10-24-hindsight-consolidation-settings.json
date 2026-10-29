@@ -195,5 +195,184 @@
       "Added Jev cost for reflect was not measured.",
       "Costs are API-reported usage for the test calls, not invoices or list prices."
     ]
+  },
+  "update_2026_10_29": {
+    "measured_date": "2026-10-29 (America/Los_Angeles)",
+    "configuration_changed": {
+      "reranker_provider": "openrouter",
+      "previous_reranker_model": "voyageai/rerank-3-lite",
+      "reranker_model": "cohere/rerank-4-fast",
+      "reranker_endpoint": "https://openrouter.ai/api/v1/rerank"
+    },
+    "reason": "Upstream Voyage reranker HTTP 429 caused reflect retrieval failures and HTTP 500 responses.",
+    "reranker_only_comparison": {
+      "method": "2 fixed synthetic queries, 300 documents each, 3 repetitions per model, rotated model order; one independently specified gold document per query",
+      "dataset_sha256": "5920360eb4c6c1049fa08a1059ce7266c93be024d89a373d12a8b2fcc1f6bbb3",
+      "models": [
+        {
+          "model": "cohere/rerank-4-fast",
+          "attempts": 6,
+          "successful_calls": 6,
+          "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+          ],
+          "upstream_provider": "Cohere",
+          "mean_success_seconds": 0.7182476803342676,
+          "median_success_seconds": 0.683358895501442,
+          "cost_usd_per_successful_call": [
+            0.006,
+            0.006,
+            0.006,
+            0.006,
+            0.006,
+            0.006
+          ],
+          "billing_usage_per_successful_call": [
+            {
+              "search_units": 3
+            },
+            {
+              "search_units": 3
+            },
+            {
+              "search_units": 3
+            },
+            {
+              "search_units": 3
+            },
+            {
+              "search_units": 3
+            },
+            {
+              "search_units": 3
+            }
+          ],
+          "gold_ranks": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "model": "cohere/rerank-v3.5",
+          "attempts": 6,
+          "successful_calls": 6,
+          "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+          ],
+          "upstream_provider": "Cohere",
+          "mean_success_seconds": 1.0981995554999837,
+          "median_success_seconds": 1.1251769794980646,
+          "cost_usd_per_successful_call": [
+            0.003,
+            0.003,
+            0.003,
+            0.003,
+            0.003,
+            0.003
+          ],
+          "billing_usage_per_successful_call": [
+            {
+              "search_units": 3
+            },
+            {
+              "search_units": 3
+            },
+            {
+              "search_units": 3
+            },
+            {
+              "search_units": 3
+            },
+            {
+              "search_units": 3
+            },
+            {
+              "search_units": 3
+            }
+          ],
+          "gold_ranks": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "model": "qwen/qwen3-reranker-8b",
+          "attempts": 6,
+          "successful_calls": 4,
+          "http_statuses": [
+            503,
+            200,
+            200,
+            200,
+            200,
+            503
+          ],
+          "upstream_provider": "Fireworks",
+          "mean_success_seconds": 1.8603110937492602,
+          "median_success_seconds": 1.9513726664990827,
+          "cost_usd_per_successful_call": [
+            0.0078174,
+            0.0078472,
+            0.0078174,
+            0.0078472
+          ],
+          "billing_usage_per_successful_call": [
+            {
+              "total_tokens": 39087
+            },
+            {
+              "total_tokens": 39236
+            },
+            {
+              "total_tokens": 39087
+            },
+            {
+              "total_tokens": 39236
+            }
+          ],
+          "gold_ranks": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "post_restart_reflect": {
+      "successful_calls": 3,
+      "seconds": [
+        10.835,
+        8.879,
+        6.491
+      ],
+      "mean_seconds": 8.735,
+      "basic_answer_checks_passed": 3
+    },
+    "paused_page_recovery": "An explicit refresh completed, produced nonempty content, and cleared the failed-refresh marker.",
+    "limitations": [
+      "Small synthetic sample; no sustained-load or general semantic-quality evaluation.",
+      "Reranker-only timings exclude the rest of reflect; post-restart reflect probes establish recovery, not a controlled speedup.",
+      "API-reported successful-call costs depend on the documents; failed Qwen request costs were not returned.",
+      "Original October 25 measurements and configuration history are preserved."
+    ]
   }
 }
