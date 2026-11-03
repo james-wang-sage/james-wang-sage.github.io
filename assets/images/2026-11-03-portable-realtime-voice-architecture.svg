@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 800" role="img" aria-labelledby="title desc">
+  <title id="title">Portable realtime voice architecture</title>
+  <desc id="desc">Flutter connects to FastAPI for authenticated control and to LiveKit Cloud for media. A separate LiveKit Agents worker connects speech recognition, the shared domain core and language model gateway, and speech synthesis. API and worker share canonical storage.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6" fill="none" stroke="#8ea8ba" stroke-width="1.5"/></marker>
+    <style>text{font-family:system-ui,-apple-system,sans-serif;fill:#e7edf6} .title{font-size:28px;font-weight:650}.label{font-size:21px;font-weight:600}.small{font-size:17px;fill:#afc0d5}.box{fill:#132134;stroke:#3c536b;stroke-width:1.5}.core{fill:#102c34;stroke:#42c7c1;stroke-width:2}.edge{fill:none;stroke:#8ea8ba;stroke-width:2;marker-end:url(#arrow)}.media{stroke:#42c7c1;stroke-width:3;marker-start:url(#arrow)}.dashed{stroke-dasharray:7 6}</style>
+  </defs>
+  <rect width="1240" height="800" rx="20" fill="#091321"/>
+  <text x="44" y="52" class="title">One domain core. Two server entry points.</text>
+  <text x="44" y="83" class="small">Control: HTTPS + durable state   ·   Media: LiveKit room + streaming providers</text>
+  <rect x="44" y="142" width="250" height="174" rx="13" class="box"/>
+  <text x="67" y="179" class="label">Flutter client</text>
+  <text x="67" y="211" class="small">Mic / playback / mute</text>
+  <text x="67" y="239" class="small">Captions + agent state</text>
+  <text x="67" y="267" class="small">Server billing snapshots</text>
+  <rect x="440" y="142" width="300" height="130" rx="13" class="box"/>
+  <text x="466" y="179" class="label">FastAPI</text>
+  <text x="466" y="211" class="small">Auth · quote · room grant</text>
+  <text x="466" y="239" class="small">Status · end · availability</text>
+  <path d="M294 190 H440" class="edge"/>
+  <text x="318" y="177" class="small">HTTPS</text>
+  <rect x="44" y="408" width="250" height="126" rx="13" class="core"/>
+  <text x="67" y="448" class="label">LiveKit Cloud</text>
+  <text x="67" y="481" class="small">Rooms · audio · data</text>
+  <path d="M169 316 V408" class="edge media"/>
+  <text x="185" y="370" class="small">WebRTC</text>
+  <rect x="440" y="381" width="300" height="177" rx="13" class="core"/>
+  <text x="466" y="421" class="label">LiveKit Agents worker</text>
+  <text x="466" y="454" class="small">VAD · turns · interruption</text>
+  <text x="466" y="482" class="small">Transcript writer · meter</text>
+  <text x="466" y="510" class="small">Hosted separately from API</text>
+  <path d="M294 469 H440" class="edge media"/>
+  <text x="317" y="453" class="small">Room</text>
+  <rect x="893" y="138" width="300" height="143" rx="13" class="box"/>
+  <text x="916" y="177" class="label">Canonical storage</text>
+  <text x="916" y="210" class="small">Owned conversation + evidence</text>
+  <text x="916" y="238" class="small">Session / billing / usage</text>
+  <path d="M740 204 H893" class="edge"/>
+  <path d="M740 469 H818 V264 H893" class="edge"/>
+  <rect x="893" y="353" width="300" height="108" rx="13" class="box"/>
+  <text x="916" y="390" class="label">STT providers</text>
+  <text x="916" y="423" class="small">ElevenLabs → Cartesia fallback</text>
+  <path d="M740 407 H893" class="edge"/>
+  <rect x="893" y="499" width="300" height="108" rx="13" class="box"/>
+  <text x="916" y="537" class="label">TTS providers</text>
+  <text x="916" y="570" class="small">Cartesia → Fish Audio fallback</text>
+  <path d="M740 530 H893" class="edge"/>
+  <rect x="440" y="634" width="753" height="120" rx="13" class="core"/>
+  <text x="466" y="674" class="label">Shared domain core + streaming LLM gateway</text>
+  <text x="466" y="708" class="small">Evidence · prompt · language · context budget · frozen model</text>
+  <text x="466" y="735" class="small">OpenRouter → configured model, e.g. DeepSeek</text>
+  <path d="M590 558 V634" class="edge"/>
+  <path d="M440 235 H370 V690 H440" class="edge dashed"/>
+  <text x="44" y="696" class="small">Both server entry points</text>
+  <text x="44" y="722" class="small">import the same core.</text>
+</svg>
