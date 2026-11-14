@@ -69,14 +69,22 @@ Its closing tips also tell users to press `#` during a session to add learnings 
 
 I wrote `dream` for the one job the other three skip. It works on a project's memory directory in four phases:
 
-1. **Orient.** Read `MEMORY.md` and list orphan files, which have no index entry, and dead pointers, which have no file.
+1. **Orient.** Read `MEMORY.md`, measure it against the load limit, and list orphan files, which have no index entry, and dead pointers, which have no file. Check that the long-term store is reachable.
 2. **Gather signal.** Grep the 40 most recently modified session transcripts for corrections, approaches the user confirmed, repeated friction and decisions with a rationale. It skips anything the repo or git history already records.
-3. **Consolidate.** Merge duplicates. Resolve contradictions so the newest claim wins and the old one is deleted. Turn relative dates into absolute ones. Drop entries that name a file, flag or endpoint that no longer exists.
-4. **Prune and index.** Rebuild `MEMORY.md` with one line per memory.
+3. **Consolidate.** Merge duplicates. Resolve contradictions so the newest claim wins and the old one is removed, after the gate below has copied it. Turn relative dates into absolute ones. Drop entries that name a file, flag or endpoint that no longer exists. Move reference data, project history and closed items out to the long-term store.
+4. **Prune and index.** Rebuild `MEMORY.md` with one line per memory, under about 150 lines and 20,000 bytes.
 
 It never edits memory in place. It copies the directory to a sibling `memory.dream/`, works on the copy, and ends with a `diff -rq` plus the swap command for me to run myself. Two rules exist because of how this memory format fails. First, before deleting a file, grep for inbound `[[wikilinks]]` and repoint them. Second, never merge a `feedback` memory (how to work) with a `reference` memory (what is true), even when both are about the same topic.
 
-The first version deleted outright, which was the wrong default for my setup. I keep long-term facts in a separate store, Hindsight, as described in [my earlier post on agent memory](/2026/11/12/agent-memory-components-my-claude-code-setup.html). A sync job mirrors auto memory into that store, so a file deleted from memory soon disappears from both places. The current version therefore treats auto memory as the place for what every session needs, and moves reference data, project history and closed items out to Hindsight. Nothing leaves memory without a copy. Every removal, whether a deleted file, a merge that drops text or a superseded claim, is first written to Hindsight as its own document. That document is read back and compared with the source, and only on an exact match does the file leave `memory.dream/`. These documents are the one write outside the copy. They only add, and the report lists them so a rejected dream can delete them.
+The first version deleted outright, which was the wrong default for my setup. I keep long-term facts in a separate store, Hindsight, as described in [my earlier post on agent memory](/2026/11/12/agent-memory-components-my-claude-code-setup.html). A sync job mirrors auto memory into that store, so once a dream is swapped in, a file it deleted soon disappears from both places. The current version therefore splits the two stores: auto memory keeps what every session needs, and reference data, project history and closed items move out to Hindsight. Every removal that drops text passes one gate (text carried word for word into a surviving file is exempt):
+
+- **Copy first.** A deleted file, a merge that drops text, a superseded claim: each is first written to Hindsight as its own document. A superseded or stale claim is marked retired, so recall does not return it as current.
+- **Never overwrite.** Each copy gets a new document id, with a dated suffix if the natural id is taken. Writing to an existing id would replace that document before anyone has reviewed the dream.
+- **Read back.** The document is compared with the source text. Only on an exact match is the file removed from `memory.dream/` or trimmed to a pointer that names the document.
+- **Fail closed.** If the store is unreachable, nothing is removed in that run.
+- **Never touch secrets.** In every run, a file holding a password, token or secret is never moved or deleted; it is kept and flagged for me.
+
+These documents are the one write outside the copy. Because every one of them is new, undoing a rejected dream means deleting them, which removes nothing that existed before the run.
 
 ## 3. Side by side
 
