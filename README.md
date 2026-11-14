@@ -1,10 +1,11 @@
-# kaopu-ai.github.io
+# james-wang-sage.github.io
 
 Personal tech blog, served by GitHub Pages (built-in Jekyll, `minima` theme) at
-https://kaopu-ai.github.io/.
+https://james-wang-sage.github.io/.
 
-The site is owned by the Kaopu AI organization. The previous address,
-https://james-wang-sage.github.io/, hosts redirects that preserve article paths.
+This repository is the canonical source for the blog. The organization sites at
+https://kaopu-ai.github.io/, https://valsar-tan.github.io/, and
+https://lodi-pine.github.io/ redirect here, preserving article paths.
 
 ## Post
 
