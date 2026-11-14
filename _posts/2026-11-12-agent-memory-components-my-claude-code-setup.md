@@ -3,7 +3,7 @@ layout: post
 title: "Memory Is Understood Backward: Anthropic's Agent-Memory Components, Checked Against My Claude Code Setup"
 date: 2026-11-12
 tags: [ai, claude-code, agents, memory]
-description: "Anthropic splits agent memory into notes written in the moment and dreaming done afterward. What its experiments found, how my stack of transcripts, ctx_search, MEMORY.md and Hindsight lines up with it, and why I still keep automatic consolidation off."
+description: "Anthropic splits agent memory into notes written in the moment and dreaming done afterward. What its experiments found, how my stack of transcripts, ctx_search, MEMORY.md and Hindsight lines up with it, and why Claude Code's own dream feature does not run on my account yet."
 image: /assets/images/2026-11-12-agent-memory-components-my-claude-code-setup-cover.jpg
 ---
 
@@ -95,11 +95,13 @@ The split between the two stores is deliberate. `MEMORY.md` holds only what must
 
 **Borges's map.** The article's oversized wiki is why I like a hard cap on the always-loaded tier. 200 lines force abstraction: one line per entry, details one link away. Hindsight has no such cap, which is one more reason I read exact values from stored documents and not from a synthesis.
 
-## Where I differ: no automatic dreaming
+## Where I differ: dreaming is waiting on a rollout
 
-My `settings.json` has `autoDreamEnabled: false`. I could not find that setting in Claude Code's public documentation, so I describe only my reason for it. A background pass that merges and deletes entries on its own judgement is exactly the process most likely to misjudge a rare hard rule, and a wrong deletion is silent. The article names the related costs: notes can be wrong from the start or drift, dreaming to fix them requires compute, and maintained representations have to be kept from accumulating errors or hallucinations.
+Claude Code has a dream feature of its own: a background pass that consolidates a project's memory folder. It does not run on my account, and the reason is on Anthropic's side, not in my settings. As of Claude Code 2.1.325, the client checks a server-side feature flag before it reads the local setting, and `~/.claude.json` caches that flag for my account under `cachedGrowthBookFeatures` as `tengu_onyx_plover`, with `"enabled": false`. The local switch, `autoDreamEnabled`, is described in the client as overriding the server-side default, but it is read only after the flag makes the feature enabled or available. Neither the flag nor the setting appears in the Claude Code documentation pages I checked (the docs index and the memory, settings and commands pages, on November 14, 2026), which fits a feature that is still being rolled out.
 
-So my consolidation happens in two supervised places. When the size hook warns, I tidy `MEMORY.md` with Claude and read the diff. Hindsight builds its pages in a separate store, where nothing it does can delete a note I wrote. Promotion is manual all the way up: project note, then index line, then global rule. It is slower than dreaming, and a person has read every promoted line.
+I used to set `autoDreamEnabled: false`. I have removed it, so dream can start by itself once the flag enables it for my account. The cached flag asks for at least 24 hours and 3 sessions between runs; the client's built-in defaults are 24 hours and 5 sessions. I still treat it with care. Its instructions tell it to delete contradicted facts and to remove index pointers to memories it judges stale, which is exactly where a rare hard rule can be misjudged, and a wrong deletion is silent. The article names the related costs: notes can be wrong from the start or drift, dreaming to fix them requires compute, and maintained representations have to be kept from accumulating errors or hallucinations. So I took a backup of every project's memory folder before removing the switch, and I will read the first run's diff against it before I rely on the result.
+
+Until then my consolidation happens in two supervised places. When the size hook warns, I tidy `MEMORY.md` with Claude and read the diff. Hindsight builds its pages in a separate store, where nothing it does can delete a note I wrote. Promotion is manual all the way up: project note, then index line, then global rule. It is slower than dreaming, and a person has read every promoted line.
 
 ## Gaps the article showed me
 
