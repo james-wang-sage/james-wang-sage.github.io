@@ -288,7 +288,7 @@ You can ask an agent to copy these in with `hindsight_ingest_document`, and for 
 
 ```bash
 curl -fsSL -o ~/.hindsight/hindsight-sync-memory.py \
-  https://james-wang-sage.github.io/assets/scripts/hindsight-sync-memory.py
+  https://kaopu-ai.github.io/assets/scripts/hindsight-sync-memory.py
 python3 ~/.hindsight/hindsight-sync-memory.py --check   # list what would change: no LLM calls, no writes
 python3 ~/.hindsight/hindsight-sync-memory.py           # retain what changed, delete what is gone, wait for the jobs
 ```
