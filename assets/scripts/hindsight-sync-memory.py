@@ -33,6 +33,8 @@ import shutil
 import subprocess
 import sys
 import time
+import urllib.parse
+import urllib.request
 from datetime import datetime, timezone
 
 H = os.environ.get("HINDSIGHT_BIN") or shutil.which("hindsight") or sys.exit("hindsight CLI not found; set HINDSIGHT_BIN")
@@ -57,6 +59,26 @@ def exclusions():
 
 def hs(*args):
     return subprocess.run([H, *args], check=True, capture_output=True, text=True).stdout
+
+
+API = os.environ.get("HINDSIGHT_API_URL", "http://127.0.0.1:9077").rstrip("/")
+_strategies = {}
+
+
+def retain(bank, body, doc_id, ctx, ts):
+    """Retain one memory note as a document. The CLI has no --strategy flag, so this goes over HTTP:
+    without a strategy the bank default (`git`, a commit-diff mission) would extract a note."""
+    url = f"{API}/v1/default/banks/{urllib.parse.quote(bank, safe='')}"
+    if bank not in _strategies:
+        with urllib.request.urlopen(url + "/config", timeout=30) as r:
+            _strategies[bank] = (json.load(r).get("config") or {}).get("retain_strategies") or {}
+    item = {"content": body, "document_id": doc_id, "context": ctx, "timestamp": ts}
+    if "document" in _strategies[bank]:
+        item["strategy"] = "document"
+    req = urllib.request.Request(url + "/memories", data=json.dumps({"items": [item], "async": True}).encode(),
+                                 headers={"Content-Type": "application/json"}, method="POST")
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return json.load(r)["operation_id"]
 
 
 def slug(s):
@@ -251,8 +273,7 @@ def main():
             print(f"deleted {bank} {doc_id}")
             continue
         body, ctx, ts = local[b][doc_id]
-        op = json.loads(hs("memory", "retain", bank, body, "-d", doc_id, "-c", ctx, "-t", ts, "--async", "-o", "json"))
-        ops.append((bank, doc_id, op["operation_id"]))
+        ops.append((bank, doc_id, retain(bank, body, doc_id, ctx, ts)))
 
     failed = 0
     for bank, doc_id, op in ops:
