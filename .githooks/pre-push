@@ -37,3 +37,16 @@ if ! out=$(bun "$scan" scan $(find _posts assets -type f 2>/dev/null)); then
   printf 'pre-push: internal-looking content would go public:\n%s\nEdit it out, or push only after the owner confirms these lines.\n' "$out" >&2
   exit 1
 fi
+
+# Each pushed post must carry a codex review stamp for exactly this text (blog skill: blog.ts review → reviewed).
+# The owner can skip it for a hand-made push: BLOG_REVIEW_SKIP=1 git push
+[ "${BLOG_REVIEW_SKIP:-}" = 1 ] && exit 0
+blog="$HOME/projects/claude.skills/skills/blog/scripts/blog.ts"
+missing=""
+for f in $(find _posts -name '*.md' -type f 2>/dev/null); do
+  bun "$blog" stamped "$f" 2>/dev/null || missing="$missing\n  $f"
+done
+if [ -n "$missing" ]; then
+  printf "pre-push: no codex review stamp for the pushed text of:$missing\nRun blog.ts review, fix, review again, then blog.ts reviewed; or BLOG_REVIEW_SKIP=1 git push.\n" >&2
+  exit 1
+fi

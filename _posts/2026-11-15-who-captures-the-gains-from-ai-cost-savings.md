@@ -14,13 +14,13 @@ I recently watched a video in which the host asked a simple question: when AI lo
 - If the company keeps its prices and its profit rises, **shareholders** benefit.
 - If the lower cost turns into lower prices, **consumers** benefit.
 - If nothing visible changes because the savings are spent on AI, **AI providers** benefit.
-- If the payroll saved goes to the employees who remain, **the people running the AI** benefit.
+- If the payroll savings go to the employees who remain, **the people running the AI** benefit.
 
 I think this is a good framework. It asks the right question, which is not "how many jobs will AI replace" but "who captures the value AI creates". It has one important limit, though: it treats the saving as a fixed pie and asks only how the pie is cut. I examine how markets divide the gains and how AI can expand total output. I then consider proposals to share the gains publicly and the implications for investors and careers.
 
 ## 1. The question is incidence
 
-Economists ask a version of this question about taxes. When a tax is imposed, who pays it is not decided by who writes the check. It is decided by the markets around the transaction: the side that can least easily walk away ends up bearing more of the burden. That is called **tax incidence**.
+Economists ask a version of this question about taxes. When a tax is imposed, who pays it is not decided by who writes the check. It is decided by the markets around the transaction: in the standard competitive model, the side that is less sensitive to price, the one that can least easily walk away, bears more of the burden. That is called **tax incidence**.
 
 AI-driven cost reductions raise the same question from the other side: who ultimately receives the benefit? The answer depends less on the company that adopted AI and more on how much competition and bargaining power exist in the markets it touches.
 
@@ -30,7 +30,7 @@ The central distinction is:
 
 ## 2. Four channels, one budget
 
-The host's four outcomes are not alternatives. They are four channels through which a single saving can flow, and one AI rollout usually feeds all of them at once.
+The host's four outcomes are not alternatives. They are four channels through which a single saving can flow, and a single rollout can distribute its savings across several of them at once.
 
 | What changes | Who benefits | Economic mechanism |
 |---|---|---|
@@ -43,7 +43,7 @@ A hypothetical example. A SaaS company spends $10M a year building and maintaini
 
 - saves $4M in labor costs,
 - spends $1M on AI APIs and infrastructure,
-- cuts prices by $1M to win customers,
+- gives up $1M of revenue through lower prices, at the same sales volume,
 - gives its core engineers $500K in raises,
 - keeps the remaining $1.5M as extra profit.
 
@@ -60,7 +60,7 @@ This is a budget, not a welfare calculation: it ignores new customers, better pr
 Whether the saving stays as profit or turns into lower prices depends first on what kind of cost AI reduced. Economists call the fraction of a cost change that reaches the price the **pass-through rate**, and it works differently for two kinds of cost:
 
 - **Marginal cost**, the cost of serving one more customer: support tickets, document processing, per-unit labor. A profit-maximizing company sets its price with marginal cost in mind, so a cut here can show up in prices fairly directly.
-- **Fixed cost**, the cost that does not grow with sales: most of the engineering in the SaaS example above. A lower fixed cost does not change the profit-maximizing price for a given set of competitors. It reaches customers indirectly, by making it cheaper for new competitors to enter, which pushes prices down over time.
+- **Fixed cost**, the cost that does not grow with sales: most of the engineering in the SaaS example above. In a static model where demand, product quality, marginal cost and the set of competitors stay the same, a lower fixed cost does not change an operating company's profit-maximizing price. It can reach customers indirectly, if lower entry costs bring credible new competitors into the market and push prices down over time.
 
 How much of a marginal-cost cut reaches the price then depends on competition and on the shape of demand:
 
@@ -69,7 +69,7 @@ How much of a marginal-cost cut reaches the price then depends on competition an
 
 So the split tends to move over time:
 
-- **Short run:** early adopters and their shareholders collect the saving as profit.
+- **Short run:** early adopters may keep much of the saving as temporary profit, though customers can benefit right away where marginal costs fall.
 - **Long run:** in markets where entry is open and the technology spreads, a large share of it ends up with customers.
 
 ## 4. Labor market: productivity gains do not automatically become raises
@@ -91,7 +91,7 @@ Say a company saves $10M a year with AI, and its AI provider charges $8M. The co
 
 The growth of AI usage therefore does not guarantee that AI providers' profits grow with it.
 
-There is a second correction. Even when a company hands its whole payroll saving to an AI provider, the provider gets **revenue**, not necessarily **profit**. GPUs, energy, data centers and inference compute consume much of that revenue, and the value can keep moving upstream to whoever controls the scarce inputs there.
+There is a second correction. Even when a company hands its whole payroll saving to an AI provider, the provider gets **revenue**, not necessarily **profit**. GPUs, energy, data centers and inference compute all cost money, so vendor revenue should not be equated with profit, and the value can keep moving upstream to whoever controls the scarce inputs there.
 
 ## 6. The pie is not fixed
 
@@ -103,11 +103,11 @@ Suppose an enterprise SaaS product used to need:
 - $5M of initial capital,
 - two years of development.
 
-Now a five-person team using AI might need $500K and six months.
+For illustration, assume AI lets a five-person team build the same product with $500K over six months.
 
-That is not an existing company cutting costs. It makes business models viable that were not viable before. New founders can enter the market, build products that did not exist, and take customers from incumbents. Lower entry costs also discipline the incumbents: even a company that faces few competitors today has to price as if new ones could show up. The people who benefit are still owners and customers, but these gains come from new activity rather than from splitting a saving inside an incumbent firm, which is what the four-way split cannot see.
+That is not an existing company cutting costs. It makes business models viable that were not viable before. New founders can enter the market, build products that did not exist, and take customers from incumbents. Lower entry costs can also discipline incumbents, but only when potential entrants could credibly reach customers and compete at meaningful scale. Customer acquisition, switching costs, regulation and distribution can keep that threat weak even when building the product gets cheap. The people who benefit are still owners and customers, but these gains come from new activity rather than from splitting a saving inside an incumbent firm, which is what the four-way split cannot see.
 
-Demand can grow too. When something gets cheaper, people often use more of it. In *The Coal Question* (1865), William Stanley Jevons argued that more efficient steam engines had increased Britain's total coal consumption rather than reducing it. Greater usage does not necessarily mean greater spending, though: total spending on AI-made software, analysis or design rises only if demand is elastic enough that usage grows proportionally more than the price falls.
+Demand can grow too. When something gets cheaper, people often use more of it. In *The Coal Question* (1865), William Stanley Jevons argued that more efficient steam engines had increased Britain's total coal consumption rather than reducing it. Greater usage does not necessarily mean greater spending, though: total spending on AI-made software, analysis or design rises only if the extra usage more than offsets the lower price per unit. If the price halves, usage has to more than double; a 60% increase in usage would leave spending 20% lower.
 
 ## 7. Short-run rents, long-run competition
 
@@ -115,8 +115,8 @@ The time dimension ties the sections together. The table below is illustrative, 
 
 | Who | Short run: early-adopter lead | Later, if adoption spreads and entry stays open |
 |---|---|---|
-| Shareholders | Large share, from temporary margin gains | Shrinks, except where a moat keeps rivals out |
-| Consumers | Small share | Grows as savings turn into lower prices |
+| Shareholders | Often the larger share, from temporary margin gains | Shrinks, except where a moat keeps rivals out |
+| Consumers | Some, mainly where marginal costs fall | Grows as savings turn into lower prices |
 | AI providers | Depends on how differentiated the models are | Revenue may keep growing; margins shrink if models commoditize |
 | Employees | Concentrated in people with hard-to-supply skills | Follows bargaining power and how hard the skill is to supply |
 
@@ -124,7 +124,7 @@ For investors and founders I think this is the most important judgment of all:
 
 > Who can earn excess profit from AI in the short run, and who can keep it in the long run, are two completely different questions.
 
-If AI cuts the cost of producing code by 90% and every software company has the same AI, code itself stops being a competitive advantage. The long-run winners are more likely to be companies with customers, brand, distribution, network effects, unique data or deep workflow integration.
+If AI cuts the cost of producing code by 90% and every software company has comparable AI tools, access to those tools alone provides little differentiation. Proprietary software, reliability and engineering execution can still matter, but the long-run winners are more likely to be companies that add customers, brand, distribution, network effects, unique data or deep workflow integration on top.
 
 That is why the AI application layer is worth watching for startups, but "AI cuts the cost of this job by 90%" is not enough to call something a good business. The question to ask is:
 
@@ -132,14 +132,14 @@ That is why the AI application layer is worth watching for startups, but "AI cut
 
 ## 8. Sharing the gains: AI taxes and public equity
 
-Section 4 ended on a gap: the winners *could* compensate the people who lose income, but markets do not make them. If AI keeps shifting income from wages to profits, two concerns follow. People without shares may miss out on capital gains, even while they benefit from lower prices. And a tax system that relies heavily on wages may find that its base grows more slowly than the economy. That is why proposals to tax AI companies, or to give the public a stake in them, have moved from essays into politics. Some would redistribute income; others would also broaden capital ownership.
+Section 4 ended on a gap: the winners *could* compensate the people who lose income, but markets do not make them. If AI shifts income from wages to profits, two concerns follow. People without shares may miss out on capital gains, even while they benefit from lower prices. And a tax system that relies heavily on wages may find that its base grows more slowly than the economy. That is why proposals to tax AI companies, or to give the public a stake in them, have moved from essays into politics. Some would redistribute income; others would also broaden capital ownership.
 
 As of November 15, 2026, these are some of the proposals and corporate arrangements on the table. They differ in who controls the shares and in legal status, and none of them is settled policy:
 
 | Who | What | Status |
 |---|---|---|
-| OpenAI | Sam Altman suggested a 5% stake in OpenAI for a government-run fund, according to the Financial Times ([TechCrunch](https://techcrunch.com/2026/07/02/openai-proposed-donating-5-of-its-equity-to-a-us-sovereign-wealth-fund/), [CNBC](https://www.cnbc.com/2026/07/02/openai-proposes-us-government-own-5percent-stake-to-address-political-blowback.html)) | Reported in July 2026 as early-stage talks; no binding agreement was reported |
-| Anthropic | Contributed 846,840,960 shares to the Anthropic Public Benefit Fund, a wholly owned subsidiary. That is 5% of its fully diluted shares as of June 30, 2026, assuming its Amazon notes convert in full. At its discretion, the board may contribute up to 2% more each time the share price rises 50% above the previous milestone, starting from the IPO price ([S-1](https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm)) | Disclosed in its October 26, 2026 IPO filing; the shares sit in the company's own fund, not with the government or the public |
+| OpenAI | The Financial Times reported that Sam Altman had discussed a 5% stake in OpenAI for a government-run fund; this was a reported proposal, not a publicly announced commitment ([TechCrunch](https://techcrunch.com/2026/07/02/openai-proposed-donating-5-of-its-equity-to-a-us-sovereign-wealth-fund/), [CNBC](https://www.cnbc.com/2026/07/02/openai-proposes-us-government-own-5percent-stake-to-address-political-blowback.html)) | Reported in July 2026 as preliminary discussions, rather than an announced agreement |
+| Anthropic | Contributed 846,840,960 shares to the Anthropic Public Benefit Fund, a wholly owned subsidiary. That is 5% of its fully diluted shares as of June 30, 2026, assuming its Amazon notes convert in full. At its discretion, the board may contribute additional shares equal to up to 2% of a share base defined in the filing each time the share price rises 50% above the previous milestone, starting from the IPO price. A milestone counts only if the closing price stays above it on at least 90 of the trailing 120 trading days, and the average closing price over the ten trading days before the contribution is also above it ([S-1](https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm)) | Disclosed in its October 26, 2026 IPO filing; the shares sit in the company's own fund, not with the government or the public |
 | Sen. Bernie Sanders | The American AI Sovereign Wealth Fund Act: a tax paid in newly issued stock that would leave the government holding 50% of covered companies, with later share issuances taxed too. It covers businesses with more than $200 million a year in combined gross receipts from AI data centers, AI computing infrastructure, AI services or advanced robotics, as the bill defines them; companies that mix these with other businesses would have to separate them, and the tax would apply to the separated entity ([bill text](https://www.sanders.senate.gov/wp-content/uploads/AmericanAIWealthFundTextv618.pdf), [press release](https://www.sanders.senate.gov/press-releases/news-sanders-introduces-legislation-to-create-7-trillion-ai-sovereign-wealth-fund/)) | Introduced June 18, 2026; not law |
 
 [Lawfare](https://www.lawfaremedia.org/article/scaling-sovereign-wealth--evaluating-mechanisms-for-the-u.s.-government-to-own-parts-of-ai-companies) surveys the mechanisms, from revenue sharing to golden shares. The framework from the earlier sections raises four questions about all of them.
@@ -150,7 +150,7 @@ As of November 15, 2026, these are some of the proposals and corporate arrangeme
 
 **Equity versus cash.** Receiving shares avoids an immediate cash payment from companies that may not yet be profitable, and it lets the public share in growth that has not happened yet. It also dilutes existing shareholders, and it leaves the fund exposed to valuation risk, limited liquidity and holdings that rise and fall together, the same correlation problem discussed in Section 9. Voting shares add questions about the government's role in corporate governance.
 
-**How much money is it?** Sanders's office estimates the 50% stake at about $7 trillion, which implies roughly $14 trillion of equity in the covered companies. The bill would authorize the fund to spend about 5% of its average market value each year, after management fees, on direct payments and public services, but it also says that payouts may not require the fund to sell the shares it holds. Assuming valuations stay put, cash is somehow available, management costs are ignored, the whole 5% goes to equal direct payments, and about 340 million Americans receive them:
+**How much money is it?** In its June 18 announcement, Sanders's office estimated the proposed 50% stake at about $7 trillion, which implies roughly $14 trillion of equity in the covered companies. The bill would authorize annual appropriations equal to 5% of the fund's average market value, minus reasonable administration costs, for direct payments and public services, and it says payouts may not require the fund to sell the shares it holds. An authorization is not a guaranteed cash payment. The illustration below assumes valuations stay put, enough cash is available without selling shares, administration costs are ignored, the whole 5% goes to equal direct payments, and about 340 million Americans receive them:
 
 | Public stake in the same covered companies | Fund size | Spending at 5% a year | Per person per year |
 |---|---|---|---|
@@ -171,27 +171,27 @@ The same framework turns into a checklist. None of this is a recommendation to b
 
 **Compare returns with the cost of capital, not revenue with spending.** For AI providers and infrastructure builders, the important number is not how fast revenue grows but whether the return on the capital invested exceeds what that capital costs. Heavy capital spending in a market heading toward commodity pricing can produce large revenue and weak returns at the same time.
 
-**Ask what the price already assumes.** A company that will capture AI value is not automatically a good investment. If the market already expects that outcome, the share price reflects it, and the investor earns a good return only if reality turns out better than what was priced in. The question is not only "who wins?" but "how much winning is already in the price?"
+**Ask what the price already assumes.** A company that will capture AI value is not automatically a good investment. If the market already expects that outcome, the share price reflects it. An investor who pays that price can still earn the normal return the price implies if expectations are met, but returns above that depend on favorable surprises, such as cash flows better than what was priced in or a fall in the return investors demand, and a disappointment can mean a loss even for a company that wins. The question is not only "who wins?" but "how much winning is already in the price?"
 
 **Remember who wins in competitive markets.** In industries with fierce price competition, AI savings mostly reach customers. As a consumer you collect that benefit anyway. As an investor, a company in a commodity business that adopts AI well may still not reward its shareholders.
 
-**Think about how your career and your portfolio move together.** Your career is usually your largest asset, and it is exposed to AI in a specific way. It is tempting to treat AI-linked assets as a hedge: if the gain shifts from labor to capital, you own part of the capital. Whether that actually works depends on how those assets' returns move with the shocks to your income. A recession, or a fall in AI valuations, can hurt your job prospects and those assets at the same time, and holdings spread across several AI layers can still move together. Check that correlation before counting on the hedge.
+**Think about how your career and your portfolio move together.** For many people with substantial working years ahead, future labor income is a major economic asset, and it is exposed to AI in a specific way. It is tempting to treat AI-linked assets as a hedge: if the gain shifts from labor to capital, you own part of the capital. Whether that actually works depends on how those assets' returns move with the shocks to your income. A recession, or a fall in AI valuations, can hurt your job prospects and those assets at the same time, and holdings spread across several AI layers can still move together. Check that correlation before counting on the hedge.
 
 ## 10. What this means for your career
 
 Section 4 is the uncomfortable one for anyone who works for a salary: productivity gains do not automatically become pay gains. Demand for the work, the supply of people who can do it, and bargaining power decide the outcome. That suggests a few directions, each worth testing against your own situation.
 
-**Lean toward work that AI complements rather than replaces.** Work that AI does well gets cheaper for everyone, including the people who used to be paid for it. Work that AI makes *more* valuable has a better chance of commanding a premium, especially if demand for it grows faster than the number of people who can do it: judging whether an output is right, owning the outcome and the accountability, understanding a business well enough to know which problem is worth solving, and earning the trust of customers and colleagues.
+**Lean toward work that AI complements rather than replaces.** AI can lower the cost of supplying some tasks; whether customers then pay less, and the people who used to do them earn less, depends on competition, demand and bargaining power. Work that AI makes *more* valuable has a better chance of commanding a premium, especially if demand for it grows faster than the number of people who can do it: judging whether an output is right, owning the outcome and the accountability, understanding a business well enough to know which problem is worth solving, and earning the trust of customers and colleagues.
 
-**Build skills that stay scarce and travel with you.** Section 4 named the assets that collect the rent: customer relationships, distribution, proprietary data and key business processes. Knowing a customer is not the same as owning that relationship, and the employer usually owns the data. What you can carry is deep domain knowledge, judgment about workflows and a reputation people will follow. Skills that become commodities once everyone has AI, such as writing routine code or first drafts, are the ones to move away from.
+**Build skills that stay scarce and travel with you.** Section 4 named the assets that collect the rent: customer relationships, distribution, proprietary data and key business processes. Knowing a customer is not the same as owning that relationship, and access to your employer's data will not necessarily travel with you. What you can carry is deep domain knowledge, judgment about workflows and a reputation people will follow. Reduce your dependence on tasks whose market value may fall as AI makes them easier to supply, such as routine code or first drafts, and build the domain knowledge and judgment that complement them.
 
-**Move early, and make sure it shows.** Section 7 applies to people as well as companies: the short-run rent goes to early adopters, and the window closes as adoption spreads. But early adoption can mainly benefit your employer if the extra output is simply absorbed. Make sure it turns into scope, responsibility or pay.
+**Move early, and make sure it shows.** Section 7 applies to people as well as companies: early adoption may create a temporary advantage, and the window narrows as adoption spreads. Workers are more likely to capture that advantage when they have the bargaining power or contractual arrangements to share in the gains. But early adoption can mainly benefit your employer if the extra output is simply absorbed. Make sure it turns into scope, responsibility or pay.
 
 **Look at your employer's market and your own bargaining power.** Where a company keeps its AI savings, part of that surplus can be shared with the employees who remain, but only if they have the bargaining power to claim it; a profitable company can still cut staff. Where the industry is a price war, the saving goes to customers and the pressure often lands on headcount, though a company that grows by cutting prices may also hire. Ask both questions: how resilient is the business, and how replaceable am I in it?
 
 **Consider becoming the new entrant.** Section 6 is the most hopeful part of the post for individuals: AI may lower the cost of testing some product ideas enough that a small team, or a single person, can try what used to need a funded startup. Even if you stay employed, a small side project is a low-cost way to learn where new value is being created.
 
-**Build a buffer.** The 70 people in Section 4 are a hypothetical example, but the displacement risk behind them deserves practical preparation. Savings, an up-to-date network and a habit of learning make a transition survivable if your role is one that disappears.
+**Build a buffer.** The 70 people in Section 4 are a hypothetical example, but the displacement risk behind them deserves practical preparation. Savings, an up-to-date network and a habit of learning can make a job transition easier to manage if your role disappears.
 
 ## 11. Conclusion
 
