@@ -59,8 +59,8 @@ The interesting question is therefore not *which* group benefits but *how large 
 
 Whether the saving stays as profit or turns into lower prices depends on how much competition the company faces. Economists call the fraction of a cost change that reaches the price the **pass-through rate**.
 
-- **Strong market power.** A company with a dominant position has little reason to cut prices, even if AI lowers its costs by 80%. In the simplest textbook case, a monopolist facing linear demand with constant marginal cost passes on only half of a cost reduction.
-- **Many close competitors.** If a dozen companies sell nearly identical products and all of them adopt the same AI, the cost cut tends to become a price war. Under perfect competition, the long-run price falls to the new cost, and the saving reaches customers.
+- **Strong market power.** A company with a dominant position passes on less, even if AI lowers its costs by 80%: nothing forces it to cut prices, so it cuts only as far as maximizing its own profit requires. In the simplest textbook case, a monopolist facing linear demand with constant marginal cost passes on half of a cost reduction and keeps the other half.
+- **Many close competitors.** If a dozen companies sell nearly identical products and all of them adopt the same AI, the cost cut tends to become a price war. Under perfect competition with constant costs, the long-run price falls to the new cost, and the saving reaches customers.
 
 So the split moves over time:
 
