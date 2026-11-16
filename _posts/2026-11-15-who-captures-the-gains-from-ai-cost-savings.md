@@ -2,8 +2,8 @@
 layout: post
 title: "When AI Cuts Costs, Who Actually Gets the Money?"
 date: 2026-11-15
-tags: [ai, economics, startups]
-description: "A cost saving from AI ends up with shareholders, customers, AI vendors or the remaining staff. Competition in the product, labor and input markets decides the split, and the pie itself can grow."
+tags: [ai, economics, startups, investing, careers]
+description: "A cost saving from AI ends up with shareholders, customers, AI vendors or the remaining staff. Competition in the product, labor and input markets decides the split, and the pie itself can grow. What that means for long-term investors and for your career."
 image: /assets/images/2026-11-15-who-captures-the-gains-from-ai-cost-savings-cover.jpg
 ---
 
@@ -16,7 +16,7 @@ I recently watched a video in which the host asked a simple question: when AI lo
 - If nothing visible changes because the savings are spent on AI, **AI providers** benefit.
 - If the payroll saved goes to the employees who remain, **the people running the AI** benefit.
 
-I think this is a good framework. It asks the right question, which is not "how many jobs will AI replace" but "who captures the value AI creates". It has one important limit, though: it treats the saving as a fixed pie and asks only how the pie is cut. In this post I reorganize the argument the way an economist would: first as a question of incidence, then market by market, and finally with the pie allowed to grow.
+I think this is a good framework. It asks the right question, which is not "how many jobs will AI replace" but "who captures the value AI creates". It has one important limit, though: it treats the saving as a fixed pie and asks only how the pie is cut. In this post I reorganize the argument the way an economist would: first as a question of incidence, then market by market, then with the pie allowed to grow, and finally turn it into advice for long-term investors and for your career.
 
 ## 1. The question is incidence
 
@@ -125,7 +125,37 @@ That is why the AI application layer is worth watching for startups, but "AI cut
 
 > When every competitor can also cut costs by 90%, why will customers still pay me?
 
-## 8. Conclusion
+## 8. What this means for a long-term investor
+
+The same framework turns into a checklist. None of this is a recommendation to buy or sell anything; it is a way to ask better questions about where AI value ends up.
+
+**Follow the scarcity, not the usage.** AI usage can keep growing while profits move between layers. In each layer of the stack (chips, energy, data centers, models, applications) ask what is scarce today and how fast new supply can arrive. A bottleneck earns rents only until capacity catches up, and then the rent moves to the next bottleneck.
+
+**Separate temporary margins from durable ones.** When a company reports better margins after adopting AI, ask whether its competitors can adopt the same tools. If they can, Section 3 predicts the margin gain drifts to customers over time. Durable gains come from companies whose moat (distribution, data, network effects, switching costs) lets them keep the saving after everyone else has it too.
+
+**Revenue is not return on capital.** For AI providers and infrastructure builders, the important number is not how fast revenue grows but whether it covers the cost of the capital behind it. Heavy capital spending in a market heading toward commodity pricing can produce large revenue and weak returns at the same time.
+
+**Remember who wins in competitive markets.** In industries with fierce price competition, AI savings mostly reach customers. As a consumer you collect that benefit anyway. As an investor, a company in a commodity business that adopts AI well may still not reward its shareholders.
+
+**Hedge your own human capital.** Your career is usually your largest asset, and it is exposed to AI in a specific way. If your work is likely to be automated, holding assets that capture AI value is a natural hedge: when the gain shifts from labor to capital, you own part of the capital. Because nobody knows in advance which layer will keep the value, spreading exposure across layers is more robust than betting on one.
+
+## 9. What this means for your career
+
+Section 4 is the uncomfortable one for anyone who works for a salary: higher productivity does not automatically mean higher pay. Pay follows scarcity. That suggests a few moves.
+
+**Become a complement to AI, not a substitute for it.** Work that AI does well gets cheaper for everyone, including the people who used to be paid for it. Work that AI makes *more* valuable gets scarcer in relative terms: judging whether an output is right, owning the outcome and the accountability, understanding a business well enough to know which problem is worth solving, and earning the trust of customers and colleagues.
+
+**Own something that stays scarce.** Section 4 named the assets that collect the rent: customer relationships, distribution, proprietary data and key business processes. Inside a company, that means being the person who knows the customer, the domain and the workflow, not only the person who produces the artifact. Skills that become commodities once everyone has AI, such as writing routine code or first drafts, are the ones to move away from.
+
+**Move early.** Section 7 applies to people as well as companies: the short-run rent goes to early adopters, and the window closes as adoption spreads. Being among the first in your field to work well with AI is worth more now than it will be in a few years.
+
+**Pick an employer with pricing power.** Where a company keeps its AI savings, part of that surplus can be shared with the employees who remain. Where the industry is a price war, the saving goes to customers and the pressure lands on headcount. Which market your employer is in matters as much as how good you are at your job.
+
+**Consider becoming the new entrant.** Section 6 is the best news in the post for individuals: the cost of building a product has fallen sharply. A small team, or a single person, can now try ideas that used to need a funded startup. Even if you stay employed, a side project is the cheapest way to learn where the new value is created.
+
+**Build a buffer.** The 70 people in Section 4 are not a thought experiment. Savings, an up-to-date network and a habit of learning make a transition survivable if your role is one that disappears.
+
+## 10. Conclusion
 
 The host's four-way split is a good start. Reorganized as economics, it says:
 
