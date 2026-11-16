@@ -2,8 +2,8 @@
 layout: post
 title: "When AI Cuts Costs, Who Actually Gets the Money?"
 date: 2026-11-15
-tags: [ai, economics, startups, investing, careers]
-description: "A cost saving from AI ends up with shareholders, customers, AI vendors or the remaining staff. Competition in the product, labor and input markets decides the split, and the pie itself can grow. What that means for long-term investors and for your career."
+tags: [ai, economics, startups, investing, careers, policy]
+description: "A cost saving from AI ends up with shareholders, customers, AI vendors or the remaining staff. Competition in the product, labor and input markets decides the split, and the pie itself can grow. Plus the debate over AI taxes and public equity, and what it all means for long-term investors and for your career."
 image: /assets/images/2026-11-15-who-captures-the-gains-from-ai-cost-savings-cover.jpg
 ---
 
@@ -16,7 +16,7 @@ I recently watched a video in which the host asked a simple question: when AI lo
 - If nothing visible changes because the savings are spent on AI, **AI providers** benefit.
 - If the payroll saved goes to the employees who remain, **the people running the AI** benefit.
 
-I think this is a good framework. It asks the right question, which is not "how many jobs will AI replace" but "who captures the value AI creates". It has one important limit, though: it treats the saving as a fixed pie and asks only how the pie is cut. Below I examine the split across the product, labor and input markets, then let the pie grow, and finally draw out what it means for long-term investors and for careers.
+I think this is a good framework. It asks the right question, which is not "how many jobs will AI replace" but "who captures the value AI creates". It has one important limit, though: it treats the saving as a fixed pie and asks only how the pie is cut. Below I examine the split across the product, labor and input markets, then let the pie grow, look at proposals to tax AI companies or give the public a stake in them, and finally draw out what it means for long-term investors and for careers.
 
 ## 1. The question is incidence
 
@@ -130,7 +130,38 @@ That is why the AI application layer is worth watching for startups, but "AI cut
 
 > When every competitor can also cut costs by 90%, why will customers still pay me?
 
-## 8. What this means for a long-term investor
+## 8. Sharing the gains: AI taxes and public equity
+
+Section 4 ended on a gap: the winners *could* compensate the people who lose income, but markets do not make them. If AI keeps shifting income from wages to profits, two problems follow. People who own no shares miss out on the growth, and a tax system that relies heavily on wages loses part of its base. That is why proposals to tax AI companies, or to give the public a stake in them, have moved from essays into politics. They shift the question from redistributing *income* to distributing *capital ownership*.
+
+As of November 15, 2026, these are the main proposals on the table, and none of them is settled policy:
+
+| Who | What | Status |
+|---|---|---|
+| OpenAI | Sam Altman suggested a 5% stake in OpenAI for a government-run fund, according to the Financial Times ([TechCrunch](https://techcrunch.com/2026/07/02/openai-proposed-donating-5-of-its-equity-to-a-us-sovereign-wealth-fund/), [CNBC](https://www.cnbc.com/2026/07/02/openai-proposes-us-government-own-5percent-stake-to-address-political-blowback.html)) | Reported in July 2026 as early-stage talks; no binding terms |
+| Anthropic | Contributed 846,840,960 shares, 5% of its fully diluted shares as of June 30, 2026, to the Anthropic Public Benefit Fund, a wholly owned subsidiary, with room for further contributions as the share price rises ([SEC prospectus](https://www.sec.gov/Archives/edgar/data/2130357/000162828026073040/anthropicpbc-fwpxeeaprospea.htm)) | Disclosed in its October 2026 IPO filing; the shares go to the company's own fund, not to the government |
+| Sen. Bernie Sanders | The American AI Sovereign Wealth Fund Act: a one-time 50% tax, paid in stock, on companies with at least $200 million a year in AI revenue, funding annual payments to Americans ([press release](https://www.sanders.senate.gov/press-releases/news-sanders-introduces-legislation-to-create-7-trillion-ai-sovereign-wealth-fund/), [Fortune](https://fortune.com/2026/06/18/bernie-sanders-ai-fund-bill-sam-altman-1000-payments/)) | Introduced in June 2026; not law |
+
+[Lawfare](https://lawfaremedia.org/article/scaling-sovereign-wealth--evaluating-mechanisms-for-the-u.s.-government-to-own-parts-of-ai-companies) has a useful survey of the mechanisms, from revenue sharing to golden shares. The framework from the earlier sections raises four questions about all of them.
+
+**Who actually bears an AI tax?** Section 1 applies directly. A tax on AI providers is not necessarily paid by AI providers. In a competitive model market, much of it would be passed on to the businesses that buy AI, and through them to their customers. A tax on *usage*, such as a per-token or "robot" tax, also taxes the very productivity gain everyone is hoping for and discourages adoption. A tax on *economic rent*, the profit above what is needed to keep a company investing, distorts behavior far less. The hard part is measuring that rent.
+
+**Taxing the right base.** Sections 5 and 7 suggest that model providers may not end up with most of the profit. If models commoditize, the largest gains may land with banks, insurers, software companies and retailers that use cheap AI to cut costs. A policy aimed only at the leading labs could miss much of the AI dividend. The alternative is to tax profits or capital income broadly, wherever AI raises them. That base is harder to attribute to AI, but harder to escape.
+
+**Equity versus cash.** A stake in shares does not require a company to be profitable today, and it lets the public share in growth that has not happened yet. But stock received in kind is hard to sell without moving the price. It concentrates the fund in a few companies, which is the opposite of the diversification advice in Section 9. And voting shares raise awkward questions about the government's role in corporate governance.
+
+**How much money is it?** Sanders's office puts the 50% stake at about $7 trillion, which implies roughly $14 trillion of AI equity in scope. Assuming a 5% annual payout and about 340 million Americans:
+
+| Public stake | Fund size | Payout at 5% a year | Per person per year |
+|---|---|---|---|
+| 5% (the size discussed with OpenAI) | $700B | $35B | about $100 |
+| 50% (the Sanders bill) | $7T | $350B | about $1,000 |
+
+This is a hypothetical model, not a forecast. Real payouts depend on the fund's returns, whether it can sell shares, costs and legal limits. The arithmetic still makes one point clear: a voluntary 5% stake is large in absolute terms but small per person. Even the 50% version pays about $1,000 a year, far less than a lost salary. Public equity and AI taxes can complement wages, but on their own they would not replace the income of people whose jobs disappear.
+
+My own read: sharing AI gains through public ownership and taxation is likely to remain a major policy debate, but nothing yet suggests a standard where every leading AI company hands the government 5%. Where AI profits finally settle, and how courts and Congress respond, will decide which form, if any, wins.
+
+## 9. What this means for a long-term investor
 
 The same framework turns into a checklist. None of this is a recommendation to buy or sell anything; it is a way to ask better questions about where AI value ends up.
 
@@ -146,7 +177,7 @@ The same framework turns into a checklist. None of this is a recommendation to b
 
 **Think about how your career and your portfolio move together.** Your career is usually your largest asset, and it is exposed to AI in a specific way. It is tempting to treat AI-linked assets as a hedge: if the gain shifts from labor to capital, you own part of the capital. Whether that actually works depends on how those assets' returns move with the shocks to your income. A recession, or a fall in AI valuations, can hurt your job prospects and those assets at the same time, and holdings spread across several AI layers can still move together. Check that correlation before counting on the hedge.
 
-## 9. What this means for your career
+## 10. What this means for your career
 
 Section 4 is the uncomfortable one for anyone who works for a salary: productivity gains do not automatically become pay gains. Demand for the work, the supply of people who can do it, and bargaining power decide the outcome. That suggests a few directions, each worth testing against your own situation.
 
@@ -162,12 +193,13 @@ Section 4 is the uncomfortable one for anyone who works for a salary: productivi
 
 **Build a buffer.** The 70 people in Section 4 are a hypothetical example, but the displacement risk behind them deserves practical preparation. Savings, an up-to-date network and a habit of learning make a transition survivable if your role is one that disappears.
 
-## 10. Conclusion
+## 11. Conclusion
 
 The host's four-way split is a good start. Reorganized as economics, it says:
 
 - AI can expand what the economy is able to produce; adoption costs, organizational change and market conditions shape **how much of that value is realized**.
 - **Competition, scarcity and bargaining power** determine **who gets it**, market by market.
 - Lower entry costs and expanding demand can **make the pie larger** in ways the four-way split cannot see.
+- Whether people without AI shares or AI jobs share in the gains is a **policy choice**, and the tax base matters as much as the tax rate.
 
 That is closer to the core of the AI economic shift than the usual debate about how many jobs AI will replace.
