@@ -193,7 +193,52 @@ Section 4 is the uncomfortable one for anyone who works for a salary: productivi
 
 **Build a buffer.** The 70 people in Section 4 are a hypothetical example, but the displacement risk behind them deserves practical preparation. Savings, an up-to-date network and a habit of learning can make a job transition easier to manage if your role disappears.
 
-## 11. Conclusion
+## 11. A hypothetical case: when coding gets ten times faster
+
+Consider a software company whose developers adopt AI and, for the sake of argument, can implement the same change, to the same quality standard, in one-tenth of the coding time. With AI, the company keeps last year's prices and headcount, retains enough customers to match last year's revenue, keeps total pay and all other non-AI operating costs unchanged, and expenses the AI bill this year. Both scenarios for this year face the same competitors. Where did the gain go?
+
+It helps to sort Section 2's channels by the four relationships every company has: the people who own it, the people who work for it, the people who buy from it, and the suppliers it buys from. Here the relevant supplier is the AI provider. As a mnemonic:
+
+```text
+effects of AI = AI vendor + customers + employees + shareholders
+```
+
+Unlike the cash budget in Section 2, this is not an equation you can add up. The vendor's bill is revenue to the vendor, the shareholders' line is a change in profit, and what customers and employees receive may never be priced at all. It is a checklist of where to look: start with the change in operating profit, then ask what changed for customers, for employees and for the supplier.
+
+| Party | How it can benefit | What tends to set its share |
+|---|---|---|
+| AI provider | Subscriptions and token fees | Pricing power: substitutable models compete prices down; a differentiated provider may sustain a markup |
+| Customers | Lower prices, or more features and faster fixes at the same price | Competition and cost type: prices fall most readily when AI cuts the cost of serving each customer and rivals can make the same saving; cheaper development reaches customers mainly through better products or new entry (Section 3) |
+| Employees | Raises, or a lighter workload at the same pay | How scarce and hard to replace they are, and how much bargaining power they have (Section 4) |
+| Shareholders | Higher margins, from fewer hires or higher prices | Whether the company has a cost or product advantage rivals cannot readily match: data, customer relationships, switching costs |
+
+Two mechanisms sit behind the table. In a competitive market, an industry-wide cut in unit costs reaches buyers more fully when demand is less elastic relative to supply. In a negotiation, a party that is hard to replace or has a credible alternative is better placed to secure a share; a party that is locked in is worse placed.
+
+Applied to the case, the puzzle resolves. Under these assumptions, operating profit falls from last year by the amount of the AI bill. That year-over-year drop is what the company sees, and it is why AI can look like a pure cost. The effect of adoption is a different comparison: this year's profit against what profit would have been this year without AI. A hypothetical example: last year operating profit was $1M; this year it is $900K after a $100K AI bill. Without AI, assume that in the same year slower delivery would have cost $150K of contribution margin through lost renewals, leaving operating profit at $850K. Profit fell $100K year over year, yet adoption added $50K of operating profit against that baseline. What shareholders finally receive still depends on taxes, payouts and valuation. The AI provider collects its bill. Customers benefit if the team ships improvements sooner at the same price. Employees benefit if the time saved lightens their workload, a real gain that never appears in a financial statement.
+
+Three caveats keep the checklist honest.
+
+**Only realized gains get divided.** Writing code is one stage of delivery. Requirements, review, testing, release and customer adoption do not get faster just because coding does. If coding accounts for a quarter of elapsed delivery time and the stages run in sequence, a tenfold coding speedup leaves one item taking 77.5% of its old delivery time (`75% + 25% ÷ 10`), 22.5% less, by Amdahl's law. The quarter is an assumption for illustration, not a measurement. The unchanged stages now account for about 97% of the time to deliver one item, and team throughput still depends on queues and on which stages have spare capacity.
+
+**Some of the gain is a loss avoided.** Reported revenue already includes the customers the company kept. What the statements cannot show is how many would have left if competitors had adopted AI and this company had not. Judging the return means comparing operating profit with and without AI under the same competitive assumptions, and that requires a counterfactual estimate.
+
+**Competitors and tax policy also shape who benefits.** Competitors and new entrants (Section 6) influence how much reaches customers, and corporate and shareholder taxes affect how much of any profit gain investors ultimately keep.
+
+### How a software company can capture a share
+
+Over time, the company can turn freed capacity into lower spending, additional sales, or a product customers will pay more for. The levers below are not ranked by how common they are; the last column is the test for whether each one pays.
+
+| Lever | What it means | It pays if |
+|---|---|---|
+| Freeze hiring and let attrition shrink the team | No layoffs, but departures are not replaced | Payroll saved exceeds the cost of AI, rework and any business lost through slower delivery |
+| Use the same people to build more products or enter more markets | Grow the pie: when something gets cheaper, demand for it can rise (Section 6) | Extra revenue exceeds all the extra cost |
+| Charge separately for AI features, or price on usage or on outcomes | Usage pricing charges for consumption; outcome pricing charges for a defined result; either can replace or sit alongside a seat fee | Extra revenue covers the extra cost plus the margin of any customers who leave; competitors that include comparable features at no extra charge can limit what customers will pay |
+| Cut contractors and outsourcing | Remove external costs first | The saving recurs and exceeds the added AI and rework costs |
+| Build a moat: proprietary data, customer relationships, distribution, switching costs | Make the gain hard for rivals to compete away | The moat holds; this is what sustains above-normal returns in long-run competition |
+
+In one line: **productivity raises pay mainly where demand for the skill grows faster than its supply and workers can bargain for a share, and an efficiency gain is most exposed to competition when it cuts the cost of serving each customer.** An industry-wide cut in that cost can lower prices; a cut in fixed development cost can stay with incumbents in the short run even when rivals copy it, and reaches customers through better products or new entry over time (Section 3). An early adopter's lead over rivals tends to be temporary unless something stops them from catching up (Section 7).
+
+## 12. Conclusion
 
 The host's four-way split is a good start. Reorganized as economics, it says:
 
