@@ -28,6 +28,12 @@ The central distinction is:
 
 > **Value creation ≠ value capture.** The party that creates value is not necessarily the party that keeps it.
 
+### Labor value and market price
+
+Suppose a company starts using AI to produce the standardized reports it sells. The method becomes standard in the industry, and a report of the same quality takes less labor to make, even counting the labor that went into its inputs. In Marx's labor theory of value, **a commodity's value is determined by its socially necessary labor time**. That's the time it takes to make it under normal conditions, at the average level of skill and intensity. By that measure, each report has less value even as the industry can produce more reports with the same amount of labor. The report's selling price can still move in a different direction. [Marx, *Capital*, Volume I, Chapter 1](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm) and [Chapter 3](https://www.marxists.org/archive/marx/works/1867-c1/ch03.htm)
+
+Now look at what the company pays for compute. If companies are willing and able to rent more computing capacity at any given price, effective demand rises. If suppliers can't add capacity quickly, **compute becomes scarcer relative to effective demand, and its price can rise**. For a report producer renting the same amount of compute, the higher rate can eat into its labor savings. [OpenStax, *Principles of Economics*, Sections 3.1](https://openstax.org/books/principles-economics-3e/pages/3-1-demand-supply-and-equilibrium-in-markets-for-goods-and-services) and [3.3](https://openstax.org/books/principles-economics-3e/pages/3-3-changes-in-equilibrium-price-and-quantity-the-four-step-process)
+
 ## 2. Four channels, one budget
 
 The host's four outcomes are not alternatives. They are four channels through which a single saving can flow, and a single rollout can distribute its savings across several of them at once.
