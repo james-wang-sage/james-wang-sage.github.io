@@ -3,20 +3,22 @@ layout: post
 title: "When AI Cuts Costs, Who Actually Gets the Money?"
 date: 2026-11-15
 tags: [ai, economics, startups, investing, careers, policy]
-description: "A cost saving from AI ends up with shareholders, customers, AI vendors or the remaining staff. Competition in the product, labor and input markets decides the split, and the pie itself can grow. The post also examines AI taxes, public equity, and the implications for investors and workers."
+description: "One AI rollout can split its savings among an AI vendor, customers, staff and shareholders at the same time. Competition, scarcity and bargaining power in each market set the shares, new entrants can grow the pie, and the split changes what investors and workers should do."
 image: /assets/images/2026-11-15-who-captures-the-gains-from-ai-cost-savings-cover.jpg
 ---
 
 ![A glowing pie on a dark table, its uneven slices drifting toward a stack of coins, shopping bags, a server rack and a lone workstation](/assets/images/2026-11-15-who-captures-the-gains-from-ai-cost-savings-cover.jpg)
 
-I recently watched a video in which the host asked a simple question: when AI lowers a company's costs, who benefits? The host gave four answers:
+When AI lowers a company's costs, the saving need not stay in one place: a single rollout can benefit several groups at once. How much each group keeps depends less on the company than on competition, scarcity and bargaining power in the markets around it. And because AI can also make it cheaper to start a company, it can grow the pie instead of only dividing it.
+
+I started from a video whose host asked who benefits when AI lowers a company's costs, and gave four answers:
 
 - If the company keeps its prices and its profit rises, **shareholders** benefit.
 - If the lower cost turns into lower prices, **consumers** benefit.
 - If nothing visible changes because the savings are spent on AI, **AI providers** benefit.
 - If the payroll savings go to the employees who remain, **the people running the AI** benefit.
 
-I think this is a good framework. It asks the right question, which is not "how many jobs will AI replace" but "who captures the value AI creates". It has one important limit, though: it treats the saving as a fixed pie and asks only how the pie is cut. I examine how markets divide the gains and how AI can expand total output. I then consider proposals to share the gains publicly and the implications for investors and careers.
+It is a good framework because it asks the right question: not "how many jobs will AI replace" but "who captures the value AI creates". Its limit is that it treats the saving as a fixed pie and asks only how the pie is cut.
 
 ## 1. The question is incidence
 
@@ -53,13 +55,13 @@ A hypothetical example. A SaaS company spends $10M a year building and maintaini
 - gives its core engineers $500K in raises,
 - keeps the remaining $1.5M as extra profit.
 
-Holding sales volume, product quality and other costs constant, the year's cash-flow changes reconcile as follows:
+With sales volume, product quality and other costs unchanged and the AI bill expensed this year, here is how the company uses the $4M in gross labor savings:
 
 ```text
-$4.0M saved = $1.0M AI vendor + $1.0M customers + $0.5M employees + $1.5M shareholders
+$4.0M saved = $1.0M AI vendor + $1.0M customers + $0.5M employees + $1.5M higher operating profit
 ```
 
-![A $4.0M labor saving branching into $1.0M for the AI vendor, $1.0M for customers through lower prices, $0.5M for employees as raises, and $1.5M for shareholders as extra profit](/assets/images/2026-11-15-who-captures-the-gains-from-ai-cost-savings-four-channels.svg)
+![A $4.0M labor saving branching into $1.0M for the AI vendor, $1.0M for customers through lower prices, $0.5M for employees as raises, and $1.5M of higher operating profit kept by the company](/assets/images/2026-11-15-who-captures-the-gains-from-ai-cost-savings-four-channels.svg)
 
 This is a budget, not a welfare calculation: it ignores new customers, better products and everything else that changes when a company adopts AI. Still, it makes the point. The interesting question is not *which* group benefits but *how large each share is*. Each share is set in a different market, so the next three sections take them one market at a time.
 
@@ -136,9 +138,7 @@ For investors and founders I think this is the most important judgment of all:
 
 If AI cuts the cost of producing code by 90% and every software company has comparable AI tools, access to those tools alone provides little differentiation. Proprietary software, reliability and engineering execution can still matter, but the long-run winners are more likely to be companies that add customers, brand, distribution, network effects, unique data or deep workflow integration on top.
 
-That is why the AI application layer is worth watching for startups, but "AI cuts the cost of this job by 90%" is not enough to call something a good business. The question to ask is:
-
-> When every competitor can also cut costs by 90%, why will customers still pay me?
+That is why the AI application layer is worth watching for startups, but "AI cuts the cost of this job by 90%" is not enough to call something a good business. The question to ask is: *when every competitor can also cut its coding costs by 90%, why will customers still pay me?*
 
 ## 8. Sharing the gains: AI taxes and public equity
 
@@ -149,12 +149,12 @@ As of November 15, 2026, these are some of the proposals and corporate arrangeme
 | Who | What | Status |
 |---|---|---|
 | OpenAI | The Financial Times reported that Sam Altman had discussed a 5% stake in OpenAI for a government-run fund; this was a reported proposal, not a publicly announced commitment ([TechCrunch](https://techcrunch.com/2026/07/02/openai-proposed-donating-5-of-its-equity-to-a-us-sovereign-wealth-fund/), [CNBC](https://www.cnbc.com/2026/07/02/openai-proposes-us-government-own-5percent-stake-to-address-political-blowback.html)) | The 5% figure was reported in July 2026 as preliminary discussions, rather than an announced agreement. In a statement published by [The Washington Sun](https://www.washingtonsun.com/technology/sam-altman-privately-rejected-open-ai-government-equity) on September 9, 2026, OpenAI said it supports a "government-administered public wealth fund" but would not support the government taking a "controlling or ownership stake in AI companies"; it said it had discussed with policymakers whether AI companies could contribute equity to help seed such a fund, but was "not close to anything specific" |
-| Anthropic | Contributed 846,840,960 shares to the Anthropic Public Benefit Fund, a wholly owned subsidiary. That is 5% of its fully diluted shares as of June 30, 2026, assuming its Amazon notes convert in full. At its discretion, the board may contribute additional shares equal to up to 2% of a share base defined in the filing each time the share price rises 50% above the previous milestone, starting from the IPO price. A milestone counts only if the closing price stays above it on at least 90 of the trailing 120 trading days, and the average closing price over the ten trading days before the contribution is also above it ([S-1](https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm)) | Disclosed in its October 26, 2026 IPO filing; the shares sit in the company's own fund, not with the government or the public |
-| Sen. Bernie Sanders | The American AI Sovereign Wealth Fund Act: a tax paid in newly issued stock that would leave the government holding 50% of covered companies, with later share issuances taxed too. It covers businesses with more than $200 million a year in combined gross receipts from AI data centers, AI computing infrastructure, AI services or advanced robotics, as the bill defines them; companies that mix these with other businesses would have to separate them, and the tax would apply to the separated entity ([bill text](https://www.sanders.senate.gov/wp-content/uploads/AmericanAIWealthFundTextv618.pdf), [press release](https://www.sanders.senate.gov/press-releases/news-sanders-introduces-legislation-to-create-7-trillion-ai-sovereign-wealth-fund/)) | Introduced June 18, 2026; not law |
+| Anthropic | Contributed 846,840,960 shares to the Anthropic Public Benefit Fund, a wholly owned subsidiary. That is 5% of its fully diluted shares as of June 30, 2026, assuming its Amazon notes convert in full. At its discretion, the board may contribute additional shares equal to up to 2% of a share base defined in the filing each time the share price rises 50% above the previous milestone, starting from the IPO price. A milestone counts only if the stock closes above it on at least 90 of the trailing 120 trading days, and the average closing price over the ten trading days before the contribution is also above it ([S-1](https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm)) | Disclosed in its October 26, 2026 IPO filing; the shares sit in the company's own fund, not with the government or the public |
+| Sen. Bernie Sanders | The American AI Sovereign Wealth Fund Act: a tax paid in newly issued equity (stock, for a corporation) that would leave the government holding 50% of covered companies, with later equity issuances taxed too. It covers businesses with more than $200 million a year in combined gross receipts from AI data centers, AI computing infrastructure, AI services or advanced robotics, as the bill defines them; companies that mix these with other businesses would have to separate them, and the tax would apply to the separated entity ([bill text](https://www.sanders.senate.gov/wp-content/uploads/AmericanAIWealthFundTextv618.pdf), [press release](https://www.sanders.senate.gov/press-releases/news-sanders-introduces-legislation-to-create-7-trillion-ai-sovereign-wealth-fund/)) | Introduced June 18, 2026; not law |
 
 [Lawfare](https://www.lawfaremedia.org/article/scaling-sovereign-wealth--evaluating-mechanisms-for-the-u.s.-government-to-own-parts-of-ai-companies) surveys the mechanisms, from revenue sharing to golden shares. The framework from the earlier sections raises four questions about all of them.
 
-**Who actually bears an AI tax?** Section 1 applies directly: the company that writes the check is not necessarily the one that bears the burden. Who does depends on what is taxed, how sensitive supply and demand are to price, and the time horizon. A tax that raises the cost of each unit of AI, such as a per-token or "robot" tax, can be passed on to the businesses that buy AI and through them to their customers, and it tends to discourage adoption, though it could be justified where AI use imposes costs on others. A one-time levy on existing equity works differently. If it is unexpected and credibly never repeated, it falls mainly on the shareholders who own the stock when the policy is announced, because the loss is priced in at once. The Sanders bill does not fit that model exactly, since it also taxes later share issuances. A tax on *economic rent*, the profit above what is needed to keep a company investing, distorts investment far less, but only if it properly allows for investment costs, a normal return and losses. Not every profit tax is a rent tax.
+**Who actually bears an AI tax?** Section 1 applies directly: the company that writes the check is not necessarily the one that bears the burden. Who does depends on what is taxed, how sensitive supply and demand are to price, and the time horizon. A tax that raises the cost of each unit of AI, such as a per-token or "robot" tax, can be passed on to the businesses that buy AI and through them to their customers, and it tends to discourage adoption, though it could be justified where AI use imposes costs on others. A one-time levy on existing equity works differently. If it is unexpected and credibly never repeated, it falls mainly on the shareholders who own the stock when the policy is announced, because the loss is priced in at once. The Sanders bill does not fit that model exactly, since it also taxes later equity issuances. A tax on *economic rent*, the profit above what is needed to keep a company investing, distorts investment far less, but only if it properly allows for investment costs, a normal return and losses. Not every profit tax is a rent tax.
 
 **Taxing the right base.** Sections 5 and 7 suggest that model providers may not end up with most of the profit. If models commoditize, the gains may go to the businesses that use cheap AI, to their customers, or upstream to whoever controls scarce chips and energy. A policy aimed only at the leading labs could miss much of the AI dividend. The alternative is to tax profits or capital income broadly. A broad base avoids having to identify AI-specific profits, though avoidance and capital mobility remain concerns.
 
@@ -162,7 +162,7 @@ As of November 15, 2026, these are some of the proposals and corporate arrangeme
 
 **How much money is it?** In its June 18 announcement, Sanders's office estimated the proposed 50% stake at about $7 trillion, which implies roughly $14 trillion of equity in the covered companies. The bill would authorize annual appropriations equal to 5% of the fund's average market value, minus reasonable administration costs, for direct payments and public services, and it says payouts may not require the fund to sell the shares it holds. An authorization is not a guaranteed cash payment. The illustration below assumes valuations stay put, enough cash is available without selling shares, administration costs are ignored, the whole 5% goes to equal direct payments, and about 340 million Americans receive them:
 
-| Public stake in the same covered companies | Fund size | Spending at 5% a year | Per person per year |
+| Public stake in the same covered companies | Fund size | Illustrative annual amount at 5%, before costs | Per person per year |
 |---|---|---|---|
 | Illustrative 5% stake across the companies covered by the Sanders bill | $700B | $35B | about $100 |
 | 50% (the Sanders bill) | $7T | $350B | about $1,000 |
@@ -213,7 +213,7 @@ It helps to sort Section 2's channels by the four relationships every company ha
 effects of AI = AI vendor + customers + employees + shareholders
 ```
 
-Unlike the cash budget in Section 2, this is not an equation you can add up. The vendor's bill is revenue to the vendor, the shareholders' line is a change in profit, and what customers and employees receive may never be priced at all. It is a checklist of where to look: start with the change in operating profit, then ask what changed for customers, for employees and for the supplier.
+Unlike the dollar breakdown in Section 2, this is not an equation you can add up. The vendor's bill is revenue to the vendor, the shareholders' line is a change in profit, and what customers and employees receive may never be priced at all. It is a checklist of where to look: start with the change in operating profit, then ask what changed for customers, for employees and for the supplier.
 
 | Party | How it can benefit | What tends to set its share |
 |---|---|---|
@@ -250,13 +250,10 @@ Over time, the company can turn freed capacity into lower spending, additional s
 
 In one line: **productivity raises pay mainly where demand for the skill grows faster than its supply and workers can bargain for a share, and an efficiency gain is most exposed to competition when it cuts the cost of serving each customer.** An industry-wide cut in that cost can lower prices; a cut in fixed development cost can stay with incumbents in the short run even when rivals copy it, and reaches customers through better products or new entry over time (Section 3). An early adopter's lead over rivals tends to be temporary unless something stops them from catching up (Section 7).
 
-## 12. Conclusion
+## 12. Ask who is hard to replace
 
-The host's four-way split is a good start. Reorganized as economics, it says:
+The four-way split shows where an AI saving can go; it does not show where the saving stays. When rivals can match a cut in the cost of serving each customer, competition can pass some of the saving through in lower prices. Lower development costs can raise profits in the short run and make entry easier over time. Who keeps a lasting share depends on what remains scarce and who can bargain for it: a customer relationship, distribution, proprietary data, a skill few people can supply, or the chips and energy further upstream.
 
-- AI can expand what the economy is able to produce; adoption costs, organizational change and market conditions shape **how much of that value is realized**.
-- **Competition, scarcity and bargaining power** determine **who gets it**, market by market.
-- Lower entry costs and expanding demand can **make the pie larger** in ways the four-way split cannot see.
-- **Policy helps determine how broadly AI gains are shared**, especially with people whose labor income falls, and the tax base matters as much as the tax rate.
+So when a company, a vendor or an employer announces an AI efficiency gain, ask who in that chain is hard to replace. Together with how easily rivals can copy the cut, the answer says more about who keeps the gain than the size of the saving does, and it is the same question for an investor choosing a layer of the stack and for a worker choosing which skills to build.
 
-That is closer to the core of the AI economic shift than the usual debate about how many jobs AI will replace.
+What remains open is policy. If the gains settle with the owners of scarce assets, the unsolved design problem is how a public fund or a broad profit tax could support workers whose wages fall, including in years when a fund's holdings pay out little cash.
