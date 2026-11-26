@@ -206,7 +206,7 @@ body { -webkit-font-smoothing: antialiased; }
 .search-form { display: grid; gap: 10px; margin-bottom: 18px; }
 .search-form input { width: 100%; box-sizing: border-box; padding: 14px 16px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--heading); font-size: 16px; }
 .search-form input::placeholder { color: var(--muted); }
-.post-comments { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+.post-comments { max-width: 760px; margin: 0 auto 72px; }
 .tag-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
 .tag-filter button { padding: 6px 12px; background: none; font-size: 12px; cursor: pointer; }
 .tag-filter button span { color: var(--muted); }
