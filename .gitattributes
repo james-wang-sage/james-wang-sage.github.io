@@ -1,0 +1,2 @@
+# Generated SVGs (matplotlib, mmdc) carry trailing spaces; keep `git diff --check` for hand-written text.
+*.svg -whitespace

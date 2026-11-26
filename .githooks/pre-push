@@ -43,6 +43,7 @@ fi
 [ "${BLOG_REVIEW_SKIP:-}" = 1 ] && exit 0
 blog="$HOME/projects/claude.skills/skills/blog/scripts/blog.ts"
 missing=""
+# cwd is $tmp here (cd above): it holds only the files this push changes, at their pushed content.
 for f in $(find _posts -name '*.md' -type f 2>/dev/null); do
   bun "$blog" stamped "$f" 2>/dev/null || missing="$missing\n  $f"
 done
