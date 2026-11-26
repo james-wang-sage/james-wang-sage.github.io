@@ -59,6 +59,8 @@ Holding sales volume, product quality and other costs constant, the year's cash-
 $4.0M saved = $1.0M AI vendor + $1.0M customers + $0.5M employees + $1.5M shareholders
 ```
 
+![A $4.0M labor saving branching into $1.0M for the AI vendor, $1.0M for customers through lower prices, $0.5M for employees as raises, and $1.5M for shareholders as extra profit](/assets/images/2026-11-15-who-captures-the-gains-from-ai-cost-savings-four-channels.svg)
+
 This is a budget, not a welfare calculation: it ignores new customers, better products and everything else that changes when a company adopts AI. Still, it makes the point. The interesting question is not *which* group benefits but *how large each share is*. Each share is set in a different market, so the next three sections take them one market at a time.
 
 ## 3. Product market: competition decides shareholders versus customers
@@ -102,6 +104,8 @@ There is a second correction. Even when a company hands its whole payroll saving
 ## 6. The pie is not fixed
 
 The biggest limitation of the four-way split is that it only redistributes a saving inside companies that already exist. AI may also lower the cost of starting a company.
+
+![Left: four hands each take one slice of a fixed pie, labelled Split the saving. Right: a larger pie gains a new slice from new entrants, labelled Grow the pie](/assets/images/2026-11-15-who-captures-the-gains-from-ai-cost-savings-grow-the-pie.jpg)
 
 Suppose an enterprise SaaS product used to need:
 
@@ -225,6 +229,8 @@ Applied to the case, the puzzle resolves. Under these assumptions, operating pro
 Three caveats keep the checklist honest.
 
 **Only realized gains get divided.** Writing code is one stage of delivery. Requirements, review, testing, release and customer adoption do not get faster just because coding does. If coding accounts for a quarter of elapsed delivery time and the stages run in sequence, a tenfold coding speedup leaves one item taking 77.5% of its old delivery time (`75% + 25% ÷ 10`), 22.5% less, by Amdahl's law. The quarter is an assumption for illustration, not a measurement. The unchanged stages now account for about 97% of the time to deliver one item, and team throughput still depends on queues and on which stages have spare capacity.
+
+![Two bars of delivery time per item: before AI, other stages take 75% and coding 25%, totalling 100%; with coding ten times faster, coding shrinks to 2.5% and the total is 77.5%](/assets/images/2026-11-15-who-captures-the-gains-from-ai-cost-savings-amdahl.svg)
 
 **Some of the gain is a loss avoided.** Reported revenue already includes the customers the company kept. What the statements cannot show is how many would have left if competitors had adopted AI and this company had not. Judging the return means comparing operating profit with and without AI under the same competitive assumptions, and that requires a counterfactual estimate.
 

@@ -11,7 +11,7 @@ if ! command -v bun >/dev/null || [ ! -f "$scan" ]; then
 fi
 
 zero=0000000000000000000000000000000000000000
-text='\.(md|markdown|html?|py|js|json|ya?ml|txt|s?css|svg|sh)$'
+text='\.(md|markdown|html?|py|js|json|ya?ml|txt|s?css|svg|sh|mmd)$'
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 n=0
