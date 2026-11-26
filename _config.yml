@@ -5,3 +5,11 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+# Analytics: cookieless page counts at https://<code>.goatcounter.com; empty disables it.
+goatcounter: ""
+# Comments: GitHub Discussions via giscus (needs the giscus app installed on this repo).
+giscus:
+  repo: james-wang-sage/james-wang-sage.github.io
+  repo_id: R_kgDOVupn3A
+  category: Announcements
+  category_id: DIC_kwDOVupn3M4DL_YX
