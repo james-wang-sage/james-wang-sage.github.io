@@ -18,6 +18,7 @@ permalink: /search/
       <button type="button" class="topic-tag" data-tag="{{ t[0] | escape }}" aria-pressed="false">{{ t[0] | replace: '-', ' ' | escape }} <span>{{ t[1].size }}</span></button>
     {%- endfor -%}
   </div>
+  {%- comment -%}shortcut: every post's full text is inlined here (~22KB/post); past ~50 posts move it to a lazily fetched search.json, past ~200 use Pagefind (needs an Actions build).{%- endcomment -%}
   <div class="story-grid" id="search-results">
     {%- for post in site.posts -%}
       {%- capture haystack -%}{{ post.title }} {{ post.description }} {{ post.tags | join: ' ' }} {{ post.content | strip_html }}{%- endcapture -%}
