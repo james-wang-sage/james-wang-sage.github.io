@@ -12,10 +12,16 @@ permalink: /search/
     <label class="eyebrow" for="search-input">Keywords</label>
     <input id="search-input" name="q" type="search" autocomplete="off" placeholder="e.g. hindsight, claude code" autofocus>
   </form>
+  <div class="tag-filter" role="group" aria-label="Filter by tag">
+    {%- assign tag_names = site.tags | sort -%}
+    {%- for t in tag_names -%}
+      <button type="button" class="topic-tag" data-tag="{{ t[0] | escape }}" aria-pressed="false">{{ t[0] | replace: '-', ' ' | escape }} <span>{{ t[1].size }}</span></button>
+    {%- endfor -%}
+  </div>
   <div class="story-grid" id="search-results">
     {%- for post in site.posts -%}
       {%- capture haystack -%}{{ post.title }} {{ post.description }} {{ post.tags | join: ' ' }} {{ post.content | strip_html }}{%- endcapture -%}
-      <div class="search-item" data-search="{{ haystack | normalize_whitespace | downcase | escape }}">
+      <div class="search-item" data-tags="{{ post.tags | join: '|' | escape }}" data-search="{{ haystack | normalize_whitespace | downcase | escape }}">
         {%- include post-card.html post=post -%}
       </div>
     {%- endfor -%}
@@ -28,13 +34,16 @@ permalink: /search/
   const items = [...document.querySelectorAll('.search-item')];
   const count = document.getElementById('search-count');
   const empty = document.getElementById('search-empty');
+  const buttons = [...document.querySelectorAll('.tag-filter button')];
+  const params = new URLSearchParams(location.search);
+  let tag = params.get('tag') ?? '';
   const run = () => {
     // Every word must start a word somewhere in the title, description, tags or body ("ai" skips "again").
     const words = input.value.toLowerCase().split(/\s+/).filter(Boolean);
     const res = words.map((w) => new RegExp(`(^|[^\\p{L}\\p{N}])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'u'));
     let shown = 0;
     for (const item of items) {
-      const hit = res.every((re) => re.test(item.dataset.search));
+      const hit = (!tag || item.dataset.tags.split('|').includes(tag)) && res.every((re) => re.test(item.dataset.search));
       item.hidden = !hit;
       if (hit) shown++;
     }
@@ -42,9 +51,12 @@ permalink: /search/
     empty.hidden = shown > 0;
     const url = new URL(location.href);
     words.length ? url.searchParams.set('q', input.value.trim()) : url.searchParams.delete('q');
+    tag ? url.searchParams.set('tag', tag) : url.searchParams.delete('tag');
     history.replaceState(null, '', url);
+    for (const b of buttons) b.setAttribute('aria-pressed', String(b.dataset.tag === tag));
   };
-  input.value = new URLSearchParams(location.search).get('q') ?? '';
+  for (const b of buttons) b.addEventListener('click', () => { tag = tag === b.dataset.tag ? '' : b.dataset.tag; run(); });
+  input.value = params.get('q') ?? '';
   input.addEventListener('input', run);
   input.form.addEventListener('submit', (e) => { e.preventDefault(); run(); });
   run();
