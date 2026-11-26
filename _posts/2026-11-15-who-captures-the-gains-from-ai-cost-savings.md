@@ -58,12 +58,12 @@ A hypothetical example. A SaaS company spends $10M a year building and maintaini
 With sales volume, product quality and other costs unchanged and the AI bill expensed this year, here is how the company uses the $4M in gross labor savings:
 
 ```text
-$4.0M saved = $1.0M AI vendor + $1.0M customers + $0.5M employees + $1.5M higher operating profit
+$4.0M saved = $1.0M AI vendor + $1.0M customers + $0.5M employees + $1.5M more operating profit (the shareholders' channel, before tax)
 ```
 
-![A $4.0M labor saving branching into $1.0M for the AI vendor, $1.0M for customers through lower prices, $0.5M for employees as raises, and $1.5M of higher operating profit kept by the company](/assets/images/2026-11-15-who-captures-the-gains-from-ai-cost-savings-four-channels.svg)
+![A $4.0M labor saving branching into $1.0M for the AI vendor, $1.0M for customers through lower prices, $0.5M for employees as raises, and $1.5M more operating profit before tax, the shareholders' channel](/assets/images/2026-11-15-who-captures-the-gains-from-ai-cost-savings-four-channels.svg)
 
-This is a budget, not a welfare calculation: it ignores new customers, better products and everything else that changes when a company adopts AI. Still, it makes the point. The interesting question is not *which* group benefits but *how large each share is*. Each share is set in a different market, so the next three sections take them one market at a time.
+The last channel is not a payment: the $1.5M is operating profit before interest and tax, and shareholders may benefit through payouts or a higher share price. This is a budget, not a welfare calculation: it ignores new customers, better products and everything else that changes when a company adopts AI. Still, it makes the point. The interesting question is not *which* group benefits but *how large each share is*. Each share is set in a different market, so the next three sections take them one market at a time.
 
 ## 3. Product market: competition decides shareholders versus customers
 
