@@ -1,0 +1,52 @@
+---
+layout: default
+title: Search
+permalink: /search/
+---
+<section class="search-page" aria-labelledby="search-heading">
+  <div class="archive-heading">
+    <div><p class="eyebrow">Find a note</p><h1 id="search-heading">Search</h1></div>
+    <span class="archive-count" id="search-count" aria-live="polite">{{ site.posts.size }} entries</span>
+  </div>
+  <form class="search-form" role="search" action="{{ '/search/' | relative_url }}">
+    <label class="eyebrow" for="search-input">Keywords</label>
+    <input id="search-input" name="q" type="search" autocomplete="off" placeholder="e.g. hindsight, claude code" autofocus>
+  </form>
+  <div class="story-grid" id="search-results">
+    {%- for post in site.posts -%}
+      {%- capture haystack -%}{{ post.title }} {{ post.description }} {{ post.tags | join: ' ' }} {{ post.content | strip_html }}{%- endcapture -%}
+      <div class="search-item" data-search="{{ haystack | normalize_whitespace | downcase | escape }}">
+        {%- include post-card.html post=post -%}
+      </div>
+    {%- endfor -%}
+  </div>
+  <p class="empty-notebook" id="search-empty" hidden>No entries match those keywords.</p>
+</section>
+<script>
+(() => {
+  const input = document.getElementById('search-input');
+  const items = [...document.querySelectorAll('.search-item')];
+  const count = document.getElementById('search-count');
+  const empty = document.getElementById('search-empty');
+  const run = () => {
+    // Every word must start a word somewhere in the title, description, tags or body ("ai" skips "again").
+    const words = input.value.toLowerCase().split(/\s+/).filter(Boolean);
+    const res = words.map((w) => new RegExp(`(^|[^\\p{L}\\p{N}])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'u'));
+    let shown = 0;
+    for (const item of items) {
+      const hit = res.every((re) => re.test(item.dataset.search));
+      item.hidden = !hit;
+      if (hit) shown++;
+    }
+    count.textContent = `${shown} ${shown === 1 ? 'entry' : 'entries'}`;
+    empty.hidden = shown > 0;
+    const url = new URL(location.href);
+    words.length ? url.searchParams.set('q', input.value.trim()) : url.searchParams.delete('q');
+    history.replaceState(null, '', url);
+  };
+  input.value = new URLSearchParams(location.search).get('q') ?? '';
+  input.addEventListener('input', run);
+  input.form.addEventListener('submit', (e) => { e.preventDefault(); run(); });
+  run();
+})();
+</script>
